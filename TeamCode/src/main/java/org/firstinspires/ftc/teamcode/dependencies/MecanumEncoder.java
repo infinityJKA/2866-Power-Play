@@ -2,11 +2,18 @@ package org.firstinspires.ftc.teamcode.dependencies;
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.Blinker;
+import com.qualcomm.robotcore.hardware.HardwareDevice;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DigitalChannel;
+import com.qualcomm.robotcore.hardware.Gyroscope;
+import com.qualcomm.robotcore.hardware.CRServo;
+import com.qualcomm.robotcore.hardware.Servo;
 
-import org.firstinspires.ftc.teamcode.enums.Direction;
 
-// https://ftcsim.org/ftcsim/
+import org.firstinspires.ftc.teamcode.enums.*;
+
+// https://ftcsim.org/ftcsim/ad
 public class MecanumEncoder {
     private RobotParameters rP;
     private LinearOpMode linearOpMode;
@@ -15,6 +22,7 @@ public class MecanumEncoder {
     private static final double COS_135 = Math.cos(3 * Math.PI / 4);
     private static final double SIN_135 = -COS_135;
     private static final double DEG_45 = Math.PI / 4;
+    public static final int TARGET_REACHED_THRESHOLD = 16;
 
     public MecanumEncoder(RobotParameters robotParameters, LinearOpMode linearOpMode){
         this.rP = robotParameters;
@@ -66,7 +74,7 @@ public class MecanumEncoder {
         runToPostions();
         setMotorPowers(power);
 
-        while (areMotorsBusy() || linearOpMode.opModeIsActive()){
+        while (areMotorsBusy() || !motorsReachedTarget(frontLeftTicks, frontRightTicks, backLeftTicks, backRightTicks) && linearOpMode.opModeIsActive()){
             Thread.yield();
         }
         resetMotorPowers();
@@ -77,12 +85,12 @@ public class MecanumEncoder {
     public void rotateDegrees(Direction rotating, double degrees, double speed){
         storeMotorModes();
         resetEncoders();
-        
+
         int frontLeftTicks = 0;
         int frontRightTicks = 0;
         int backLeftTicks = 0;
         int backRightTicks = 0;
-        
+
         double inchesToTravel = degreesToInches(degrees);
         int ticksToTravel = (int) Math.round(inchesToTicks(inchesToTravel));
 
@@ -108,68 +116,79 @@ public class MecanumEncoder {
         runToPostions();
         setMotorPowers(speed);
 
-        while (areMotorsBusy() || linearOpMode.opModeIsActive()){
+        while (areMotorsBusy() || !motorsReachedTarget(frontLeftTicks, frontRightTicks, backLeftTicks, backRightTicks) && linearOpMode.opModeIsActive()){
             Thread.yield();
         }
         resetMotorPowers();
         restoreMotorModes();
         sleep(100);
     }
-//    public void strafe(Direction strafing, double distance, double speed) {
-//        storeMotorModes();
-//        resetEncoders();
-//
-//        int frontLeftTicks = 0;
-//        int frontRightTicks = 0;
-//        int backLeftTicks = 0;
-//        int backRightTicks = 0;
-//        double frontLeftPower, frontRightPower, backLeftPower, backRightPower;
-//        frontLeftPower = frontRightPower = backLeftPower = backRightPower = 0;
-//        int ticksToTravel = (int) Math.round(inchesToTicks(distance));
-//
-//        switch (strafing) {
-//            case F_LEFT:
-//                frontRightTicks = ticksToTravel;
-//                backLeftTicks = ticksToTravel;
-//                // frontLeftPower = speed; // activate this line if using line 166 instead of 165
-//                // backRightPower = speed; // activate this line if using line 166 instead of 165
-//                break;
-//            case F_RIGHT:
-//                frontLeftTicks = ticksToTravel;
-//                backRightTicks = ticksToTravel;
-//                // frontRightPower = speed; // activate this line if using line 170 instead of 169
-//                // backLeftPower = speed; // activate this line if using line 170 instead of 169
-//                break;
-//            case B_LEFT:
-//                frontRightTicks = -ticksToTravel;
-//                backLeftTicks = -ticksToTravel;
-//                // frontLeftPower = speed; // activate this line if using line 170 instead of 169
-//                // backRightPower = speed; // activate this line if using line 170 instead of 169
-//                break;
-//            case B_RIGHT:
-//                frontLeftTicks = -ticksToTravel;
-//                backRightTicks = -ticksToTravel;
-//                // frontRightPower = speed; // activate this line if using line 170 instead of 169
-//                // backLeftPower = speed; // activate this line if using line 170 instead of 169
-//                break;
-//            default:
-//                throw new IllegalArgumentException("Strafing must be F_LEFT, F_RIGHT, B_LEFT, B_RIGHT");
-//
-//                setMotorTargets(frontLeftTicks, frontRightTicks, backLeftTicks, backRightTicks);
-//
-//                runToPostions();
-//                setMotorPowers(speed);
-//                // setMotorPowers(frontLeftPower, frontRightPower, backLeftPower, backRightPower); // Test this if the line above does not work
-//
-//                while (areMotorsBusy() || linearOpMode.opModeIsActive()) {
-//                    Thread.yield();
-//                }
-//                resetMotorPowers();
-//                restoreMotorModes();
-//                sleep(100);
-//        }
-//    }
+    public void strafe(Direction strafing, double distance, double speed){
+        storeMotorModes();
+        resetEncoders();
 
+        int frontLeftTicks = 0;
+        int frontRightTicks = 0;
+        int backLeftTicks = 0;
+        int backRightTicks = 0;
+        double frontLeftPower, frontRightPower, backLeftPower, backRightPower;
+        frontLeftPower = frontRightPower = backLeftPower = backRightPower = 0;
+        int ticksToTravel = (int) Math.round(inchesToTicks(distance));
+
+        switch (strafing) {
+            case FORWARD:
+                break;
+            case BACKWARD:
+                break;
+            case RIGHT:
+                break;
+            case LEFT:
+                break;
+            case CCW:
+                break;
+            case CW:
+                break;
+            case F_LEFT:
+                frontRightTicks = ticksToTravel;
+                backLeftTicks = ticksToTravel;
+                // frontLeftPower = speed; // activate this line if using line 166 instead of 165
+                // backRightPower = speed; // activate this line if using line 166 instead of 165
+                break;
+            case F_RIGHT:
+                frontLeftTicks = ticksToTravel;
+                backRightTicks = ticksToTravel;
+                // frontRightPower = speed; // activate this line if using line 170 instead of 169
+                // backLeftPower = speed; // activate this line if using line 170 instead of 169
+                break;
+            case B_LEFT:
+                frontRightTicks = -ticksToTravel;
+                backLeftTicks = -ticksToTravel;
+                // frontLeftPower = speed; // activate this line if using line 170 instead of 169
+                // backRightPower = speed; // activate this line if using line 170 instead of 169
+                break;
+            case B_RIGHT:
+                frontLeftTicks = -ticksToTravel;
+                backRightTicks = -ticksToTravel;
+                // frontRightPower = speed; // activate this line if using line 170 instead of 169
+                // backLeftPower = speed; // activate this line if using line 170 instead of 169
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + strafing);
+        }
+
+        setMotorTargets(frontLeftTicks, frontRightTicks, backLeftTicks, backRightTicks);
+
+        runToPostions();
+        setMotorPowers(speed);
+        // setMotorPowers(frontLeftPower, frontRightPower, backLeftPower, backRightPower); // Test this if the line above does not work
+
+        while (areMotorsBusy() || !motorsReachedTarget(frontLeftTicks, frontRightTicks, backLeftTicks, backRightTicks) && linearOpMode.opModeIsActive()){
+            Thread.yield();
+        }
+        resetMotorPowers();
+        restoreMotorModes();
+        sleep(100);
+    }
     public void restoreMotorModes(){
         rP.frontLeftMotor.setMode(frontLeftMode);
         rP.frontRightMotor.setMode(frontRightMode);
@@ -210,6 +229,16 @@ public class MecanumEncoder {
     public void resetMotorPowers() {this.setMotorPowers(0);}
 
     public boolean areMotorsBusy(){return this.rP.frontLeftMotor.isBusy() || this.rP.frontRightMotor.isBusy() || this.rP.backLeftMotor.isBusy() || this.rP.backRightMotor.isBusy();}
+
+    protected boolean motorsReachedTarget(int frontLeftTarget, int frontRightTarget, int backLeftTarget, int backRightTarget) {
+        return reachedTarget(rP.frontLeftMotor.getCurrentPosition(), frontLeftTarget, rP.frontRightMotor.getCurrentPosition(), frontRightTarget) &&
+                reachedTarget(rP.backLeftMotor.getCurrentPosition(), backLeftTarget, rP.backRightMotor.getCurrentPosition(), backRightTarget);
+    }
+
+    protected boolean reachedTarget(int currentPositionLeft, int targetPositionLeft, int currentPositionRight, int targetPositionRight) {
+        return Math.abs(currentPositionLeft - targetPositionLeft) < TARGET_REACHED_THRESHOLD && Math.abs(currentPositionRight - targetPositionRight) < TARGET_REACHED_THRESHOLD;
+    }
+
 
     protected void setMotorPowers(double power){
         this.rP.frontLeftMotor.setPower(power);
