@@ -34,8 +34,9 @@ public class AutoTester extends LinearOpMode{
 //hi
         waitForStart();
         if (opModeIsActive()){
-            mecanumEncoder.moveInches(direction.FORWARD, 100, 1);
-//            mecanumEncoder.rotateDegrees(rotation.CW, 90, 1);
+            mecanumEncoder.moveInches(direction.FORWARD, 25, 1);
+            mecanumEncoder.rotateDegrees(rotation.CW, 90, 1);
+            mecanumEncoder.moveInches(direction.FORWARD, 25, 1);
         }
 
     }public void points5(){
