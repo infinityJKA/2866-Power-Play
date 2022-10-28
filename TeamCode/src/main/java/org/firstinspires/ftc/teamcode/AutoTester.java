@@ -34,9 +34,23 @@ public class AutoTester extends LinearOpMode{
 //hi
         waitForStart();
         if (opModeIsActive()){
-            mecanumEncoder.moveInches(direction.FORWARD, 25, 1);
+//            mecanumEncoder.moveInches(direction.FORWARD, 25, 1);
+//            mecanumEncoder.rotateDegrees(rotation.CW, 90, 1);
+//            mecanumEncoder.moveInches(direction.FORWARD, 25, 1);
+            mecanumEncoder.moveInches(direction.FORWARD, 74, 1);
+            mecanumEncoder.rotateDegrees(rotation.CCW, 90, 1);
+            mecanumEncoder.moveInches(direction.FORWARD, 3.25, 1);
+            mecanumEncoder.moveInches(direction.BACKWARD, 3.25, 1);
             mecanumEncoder.rotateDegrees(rotation.CW, 90, 1);
-            mecanumEncoder.moveInches(direction.FORWARD, 25, 1);
+            mecanumEncoder.moveInches(direction.BACKWARD, 15.5, 1);
+            mecanumEncoder.rotateDegrees(rotation.CW, 90, 1);
+            mecanumEncoder.moveInches(direction.FORWARD, 22.25, 1);
+            mecanumEncoder.moveInches(direction.BACKWARD, 22.25, 1);
+            mecanumEncoder.rotateDegrees(rotation.CCW, 90, 1);
+            mecanumEncoder.moveInches(direction.FORWARD, 15.5, 1);
+            mecanumEncoder.rotateDegrees(rotation.CCW, 90, 1);
+            mecanumEncoder.moveInches(direction.FORWARD, 3.25, 1);
+
         }
 
     }public void points5(){
@@ -66,6 +80,6 @@ public class AutoTester extends LinearOpMode{
 
     }
     public void place(){
-        
+
     }
 }
