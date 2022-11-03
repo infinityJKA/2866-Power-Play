@@ -136,18 +136,7 @@ public class MecanumEncoder {
         int ticksToTravel = (int) Math.round(inchesToTicks(distance));
 
         switch (strafing) {
-            case FORWARD:
-                break;
-            case BACKWARD:
-                break;
-            case RIGHT:
-                break;
-            case LEFT:
-                break;
-            case CCW:
-                break;
-            case CW:
-                break;
+            
             case F_LEFT:
                 frontRightTicks = ticksToTravel;
                 backLeftTicks = ticksToTravel;

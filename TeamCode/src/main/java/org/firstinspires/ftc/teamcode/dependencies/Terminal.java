@@ -9,18 +9,20 @@ import com.qualcomm.robotcore.hardware.Gyroscope;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.hardware.bosch.BNO055IMU;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import org.firstinspires.ftc.teamcode.dependencies.*;
-import org.firstinspires.ftc.teamcode.enums.AllianceSide;
 import org.firstinspires.ftc.teamcode.enums.Direction;
 
-public class AutoTester{
+@Autonomous(name = "AutoTester", group = "Autonomous")
+
+public class AutoTester extends LinearOpMode{
     private DcMotor frontLeftMotor, frontRightMotor, backLeftMotor, backRightMotor, linearSlide;
     private RobotParameters rP;
     private BNO055IMU imu;
     private Direction direction, rotation;
     private MecanumEncoder mecanumEncoder;
 
-    public static void run(LinearOpMode linearOpMode, AllianceSide allianceSide){
+    public void runOpMode(){
         frontLeftMotor = hardwareMap.get(DcMotor.class, "left");
         frontRightMotor = hardwareMap.get(DcMotor.class, "right");
         backLeftMotor = hardwareMap.get(DcMotor.class, "bLeft");
@@ -29,35 +31,29 @@ public class AutoTester{
         imu = hardwareMap.get(BNO055IMU.class, "imu");
         this.rP = new RobotParameters(frontLeftMotor, frontRightMotor, backLeftMotor, backRightMotor, 1440, 2.6, 60, linearSlide, imu, 12.5);
         MecanumEncoder mecanumEncoder = new MecanumEncoder(this.rP, this);
-
-        linearOpMode.waitForStart();
-        int rotator;
-        switch(allianceSide){
-            case LEFT:
-                rotator = -1;
-            case RIGHT:
-                rotator = 1;    
-        }
-        // int rotator = allianceSide.LEFT ? -1:1;
-        if (linearOpMode.opModeIsActive()){
+//hi
+        waitForStart();
+        if (opModeIsActive()){
+//            mecanumEncoder.moveInches(direction.FORWARD, 25, 1);
+//            mecanumEncoder.rotateDegrees(rotation.CW, 90, 1);
+//            mecanumEncoder.moveInches(direction.FORWARD, 25, 1);
             mecanumEncoder.moveInches(direction.FORWARD, 74, 1);
-            mecanumEncoder.rotateDegrees(rotation.CCW, 90 * rotator, 1);
+            mecanumEncoder.rotateDegrees(rotation.CCW, 90, 1);
             mecanumEncoder.moveInches(direction.FORWARD, 3.25, 1);
             mecanumEncoder.moveInches(direction.BACKWARD, 3.25, 1);
-            mecanumEncoder.rotateDegrees(rotation.CW, 90 * rotator, 1);
+            mecanumEncoder.rotateDegrees(rotation.CW, 90, 1);
             mecanumEncoder.moveInches(direction.BACKWARD, 15.5, 1);
-            mecanumEncoder.rotateDegrees(rotation.CW, 90 * rotator, 1);
+            mecanumEncoder.rotateDegrees(rotation.CW, 90, 1);
             mecanumEncoder.moveInches(direction.FORWARD, 22.25, 1);
             mecanumEncoder.moveInches(direction.BACKWARD, 22.25, 1);
-            mecanumEncoder.rotateDegrees(rotation.CCW, 90 * rotator, 1);
+            mecanumEncoder.rotateDegrees(rotation.CCW, 90, 1);
             mecanumEncoder.moveInches(direction.FORWARD, 15.5, 1);
-            mecanumEncoder.rotateDegrees(rotation.CCW, 90 * rotator, 1);
+            mecanumEncoder.rotateDegrees(rotation.CCW, 90, 1);
             mecanumEncoder.moveInches(direction.FORWARD, 3.25, 1);
 
         }
 
-    }
-    public void points5(){
+    }public void points5(){
         //kick cone and park
         mecanumEncoder.moveInches(direction.FORWARD, 24, 1);
         mecanumEncoder.rotateDegrees(rotation.CW, 45, 1);
