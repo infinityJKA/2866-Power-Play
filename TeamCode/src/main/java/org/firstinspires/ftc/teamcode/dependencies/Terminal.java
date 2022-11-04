@@ -1,42 +1,39 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.dependencies;
 
-import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.hardware.Blinker;
-import com.qualcomm.robotcore.hardware.HardwareDevice;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DigitalChannel;
-import com.qualcomm.robotcore.hardware.Gyroscope;
-import com.qualcomm.robotcore.hardware.CRServo;
-import com.qualcomm.robotcore.hardware.Servo;
+import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.hardwareMap;
+
 import com.qualcomm.hardware.bosch.BNO055IMU;
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import org.firstinspires.ftc.teamcode.dependencies.*;
+import com.qualcomm.robotcore.hardware.DcMotor;
+
+import org.firstinspires.ftc.teamcode.enums.AllianceSide;
 import org.firstinspires.ftc.teamcode.enums.Direction;
 
-@Autonomous(name = "AutoTester", group = "Autonomous")
+@Autonomous(name = "Terminal", group = "Autonomous")
 
-public class AutoTester extends LinearOpMode{
-    private DcMotor frontLeftMotor, frontRightMotor, backLeftMotor, backRightMotor, linearSlide;
+public class Terminal{
+    private static DcMotor frontLeftMotor, frontRightMotor, backLeftMotor, backRightMotor, linearSlide;
     private RobotParameters rP;
-    private BNO055IMU imu;
+    private static BNO055IMU imu;
     private Direction direction, rotation;
     private MecanumEncoder mecanumEncoder;
+    private LinearOpMode linearOp;
 
-    public void runOpMode(){
+    public void run(LinearOpMode linearOp, AllianceSide allianceSide){
         frontLeftMotor = hardwareMap.get(DcMotor.class, "left");
         frontRightMotor = hardwareMap.get(DcMotor.class, "right");
         backLeftMotor = hardwareMap.get(DcMotor.class, "bLeft");
         backRightMotor = hardwareMap.get(DcMotor.class, "bRight");
         linearSlide = hardwareMap.get(DcMotor.class, "ls");
         imu = hardwareMap.get(BNO055IMU.class, "imu");
+        this.linearOp = linearOp;
         this.rP = new RobotParameters(frontLeftMotor, frontRightMotor, backLeftMotor, backRightMotor, 1440, 2.6, 60, linearSlide, imu, 12.5);
-        MecanumEncoder mecanumEncoder = new MecanumEncoder(this.rP, this);
+        MecanumEncoder mecanumEncoder = new MecanumEncoder(this.rP, linearOp);
 //hi
-        waitForStart();
-        if (opModeIsActive()){
-//            mecanumEncoder.moveInches(direction.FORWARD, 25, 1);
-//            mecanumEncoder.rotateDegrees(rotation.CW, 90, 1);
-//            mecanumEncoder.moveInches(direction.FORWARD, 25, 1);
+
+        linearOp.waitForStart();
+        if (linearOp.opModeIsActive()){
             mecanumEncoder.moveInches(direction.FORWARD, 74, 1);
             mecanumEncoder.rotateDegrees(rotation.CCW, 90, 1);
             mecanumEncoder.moveInches(direction.FORWARD, 3.25, 1);
