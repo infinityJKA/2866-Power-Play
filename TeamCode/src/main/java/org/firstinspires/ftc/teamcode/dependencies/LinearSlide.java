@@ -21,7 +21,7 @@ public class LinearSlide {
 
     public enum LinearPosition {
         ZERO(0), ONE(300), TWO(600), THREE(900);
-        public int ticks;
+        private final int ticks;
         LinearPosition(int i){this.ticks = i;}
     }
 
@@ -34,12 +34,12 @@ public class LinearSlide {
             linearSlideMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         }
     }
-    public void moveToPosition(LinearPosition pos, double power, int ticks){
+    public void moveToPosition(LinearPosition pos, double power){
         if (linearSlideMotor.getMode() != DcMotor.RunMode.RUN_TO_POSITION){
             linearSlideMotor.setTargetPosition(0);
             linearSlideMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         }
-        linearSlideMotor.setTargetPosition(ticks);
+        linearSlideMotor.setTargetPosition(pos.ticks);
         linearSlideMotor.setPower(power);
 
         while (linearSlideMotor.isBusy() && Math.abs(linearSlideMotor.getTargetPosition() - linearSlideMotor.getCurrentPosition()) > 10){
