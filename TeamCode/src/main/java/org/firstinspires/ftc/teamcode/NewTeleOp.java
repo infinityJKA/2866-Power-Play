@@ -14,8 +14,8 @@ public class NewTeleOp extends LinearOpMode {
         DcMotor motorFrontRight = hardwareMap.dcMotor.get("right");
         DcMotor motorBackRight = hardwareMap.dcMotor.get("bRight");
 
-        motorFrontRight.setDirection(DcMotor.Direction.REVERSE);
-        motorBackRight.setDirection(DcMotor.Direction.REVERSE);
+        motorFrontLeft.setDirection(DcMotor.Direction.REVERSE);
+        motorBackLeft.setDirection(DcMotor.Direction.REVERSE);
 
         waitForStart();
 

@@ -3,7 +3,6 @@ package org.firstinspires.ftc.teamcode.dependencies;
 //import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.hardwareMap;
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
-import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
@@ -12,7 +11,7 @@ import org.firstinspires.ftc.teamcode.enums.Direction;
 
 public class Terminal {
     private static DcMotor frontLeftMotor, frontRightMotor, backLeftMotor, backRightMotor, linearSlide;
-    ;
+    
     private static BNO055IMU imu;
 
     public static void run(LinearOpMode linearOpMode, AllianceSide allianceSide) {
@@ -43,11 +42,13 @@ public class Terminal {
             mecanumEncoder.moveInches(direction.FORWARD, 74, 1);
             mecanumEncoder.rotateDegrees(rotation.CCW, 90 * rotator, 1);
             mecanumEncoder.moveInches(direction.FORWARD, 3.25, 1);
+//            linearSlide.moveToPosition(LinearPosition.THREE, 1);
             mecanumEncoder.moveInches(direction.BACKWARD, 3.25, 1);
             mecanumEncoder.rotateDegrees(rotation.CW, 90 * rotator, 1);
             mecanumEncoder.moveInches(direction.BACKWARD, 15.5, 1);
             mecanumEncoder.rotateDegrees(rotation.CW, 90 * rotator, 1);
             mecanumEncoder.moveInches(direction.FORWARD, 22.25, 1);
+//            linearSlide.moveToPosition(LinearPosition.ONE, 1);
             mecanumEncoder.moveInches(direction.BACKWARD, 22.25, 1);
             mecanumEncoder.rotateDegrees(rotation.CCW, 90 * rotator, 1);
             mecanumEncoder.moveInches(direction.FORWARD, 15.5, 1);
