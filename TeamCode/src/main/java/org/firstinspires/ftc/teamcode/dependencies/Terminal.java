@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.dependencies;
 
 //import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.hardwareMap;
 
+
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -25,7 +26,29 @@ public class Terminal {
         MecanumEncoder mecanumEncoder = new MecanumEncoder(rP, linearOpMode);
         Direction direction = null, rotation = null;
 
+        ColorSensor colorSensor = new ColorSensor("LiveLeak", linearOpMode.hardwareMap, linearOpMode);
+
         linearOpMode.waitForStart();
+
+        // me when cola & fortnite
+        linearOpMode.telemetry.speak("yippie!");
+
+        // R = Red
+        // B = Blue
+        // G = Green
+        Parking parking;
+        if (colorSensor.isRegionGreen(0)){
+            parking = Parking.G;
+            linearOpMode.telemetry.speak("Green");
+        } else if (colorSensor.isRegionBlue(0)){
+            parking = Parking.B;
+            linearOpMode.telemetry.speak("Blue");
+        }
+        else{
+            parking = Parking.R;
+            linearOpMode.telemetry.speak("Red");
+        }
+
         int rotator = 0;
         switch (allianceSide) {
             case LEFT:
@@ -38,24 +61,24 @@ public class Terminal {
                 throw new IllegalArgumentException("Position must be LEFT or RIGHT!");
         }
         // int rotator = allianceSide.LEFT ? -1:1;
-        if (linearOpMode.opModeIsActive()) {
-            mecanumEncoder.moveInches(direction.FORWARD, 74, 1);
-            mecanumEncoder.rotateDegrees(rotation.CCW, 90 * rotator, 1);
-            mecanumEncoder.moveInches(direction.FORWARD, 3.25, 1);
-//            linearSlide.moveToPosition(LinearPosition.THREE, 1);
-            mecanumEncoder.moveInches(direction.BACKWARD, 3.25, 1);
-            mecanumEncoder.rotateDegrees(rotation.CW, 90 * rotator, 1);
-            mecanumEncoder.moveInches(direction.BACKWARD, 15.5, 1);
-            mecanumEncoder.rotateDegrees(rotation.CW, 90 * rotator, 1);
-            mecanumEncoder.moveInches(direction.FORWARD, 22.25, 1);
-//            linearSlide.moveToPosition(LinearPosition.ONE, 1);
-            mecanumEncoder.moveInches(direction.BACKWARD, 22.25, 1);
-            mecanumEncoder.rotateDegrees(rotation.CCW, 90 * rotator, 1);
-            mecanumEncoder.moveInches(direction.FORWARD, 15.5, 1);
-            mecanumEncoder.rotateDegrees(rotation.CCW, 90 * rotator, 1);
-            mecanumEncoder.moveInches(direction.FORWARD, 3.25, 1);
-
-        }
+//        if (linearOpMode.opModeIsActive()) {
+//            mecanumEncoder.moveInches(direction.FORWARD, 74, 1);
+//            mecanumEncoder.rotateDegrees(rotation.CCW, 90 * rotator, 1);
+//            mecanumEncoder.moveInches(direction.FORWARD, 3.25, 1);
+////            linearSlide.moveToPosition(LinearPosition.THREE, 1);
+//            mecanumEncoder.moveInches(direction.BACKWARD, 3.25, 1);
+//            mecanumEncoder.rotateDegrees(rotation.CW, 90 * rotator, 1);
+//            mecanumEncoder.moveInches(direction.BACKWARD, 15.5, 1);
+//            mecanumEncoder.rotateDegrees(rotation.CW, 90 * rotator, 1);
+//            mecanumEncoder.moveInches(direction.FORWARD, 22.25, 1);
+////            linearSlide.moveToPosition(LinearPosition.ONE, 1);
+//            mecanumEncoder.moveInches(direction.BACKWARD, 22.25, 1);
+//            mecanumEncoder.rotateDegrees(rotation.CCW, 90 * rotator, 1);
+//            mecanumEncoder.moveInches(direction.FORWARD, 15.5, 1);
+//            mecanumEncoder.rotateDegrees(rotation.CCW, 90 * rotator, 1);
+//            mecanumEncoder.moveInches(direction.FORWARD, 3.25, 1);
+//
+//        }
 
     }
 }
