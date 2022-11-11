@@ -40,7 +40,9 @@ public class CameraColorSensor {
         Color_Green,
         Color_Red,
         Color_Blue,
-        Color_Yellow
+        Color_Yellow,
+        // Following made by Justin, WIP
+        Color_Purple
     }
 
     // this is used to return color information
@@ -162,6 +164,11 @@ public class CameraColorSensor {
         return false;
     }
 
+    public boolean isRegionPurple(int region) {
+        List<EnumMap<Color_Enum, ColorData>> colorData = getColorData();
+        return (colorData.size() > 0 && Objects.requireNonNull(colorData.get(region).get(Color_Enum.Color_Purple)).color == Color_Enum.Color_Purple);
+    }
+
     // this class is used for drawing boxes on the screen
     public static class DebugData {
         static EnumMap<Color_Enum, Scalar> colors = new EnumMap<Color_Enum, Scalar>(Color_Enum.class);
@@ -178,6 +185,7 @@ public class CameraColorSensor {
             colors.put(Color_Enum.Color_Green, new Scalar(0, 255, 0));
             colors.put(Color_Enum.Color_Red, new Scalar(255, 0, 0));
             colors.put(Color_Enum.Color_Yellow, new Scalar(255, 255, 0));
+            colors.put(Color_Enum.Color_Purple, new Scalar(255, 0, 255));
         }
 
         public DebugData(Scalar color, Point upperLeft, Point lowerRight, int width) {
@@ -271,6 +279,7 @@ public class CameraColorSensor {
             colorScalars.put(Color_Enum.Color_Green, new Scalar(0, 255, 0));
             colorScalars.put(Color_Enum.Color_Red, new Scalar(255, 0, 0));
             colorScalars.put(Color_Enum.Color_Yellow, new Scalar(255, 255, 0));
+            colorScalars.put(Color_Enum.Color_Purple, new Scalar(255, 0, 255));
             this.parent=parent;
         }
 
@@ -355,6 +364,15 @@ public class CameraColorSensor {
                 deltaHue = 180 - average_hue_red;
                 deltaSat = 150 - average_sat_red;
             }
+
+            if (average_hue > 90 && average_hue < 120 && average_sat > MinSaturation && average_brightness > MinBrightness && stdDev_hue <= MaxStdDev) {
+                colorData.color = Color_Enum.Color_Blue;
+                deltaHue = 105 - average_hue;
+                deltaSat = 150 - average_sat;
+            }
+
+            // I HAVE NO IDEA HOW TO DO THIS HELP, HOW DO I ADD PURPLE?????
+            // -Justin
 
             // compute score
             if (deltaSat < 0) {
@@ -456,6 +474,10 @@ public class CameraColorSensor {
                 colorData = searchForColor(hsvMat, Color_Enum.Color_Yellow, region);
                 telemetryData.add(new TelemetryData("Yellow score", colorData.score));
                 region_colorData.get(region).put(Color_Enum.Color_Yellow, colorData);
+
+                colorData = searchForColor(hsvMat, Color_Enum.Color_Purple, region);
+                telemetryData.add(new TelemetryData("Yellow score", colorData.score));
+                region_colorData.get(region).put(Color_Enum.Color_Purple, colorData);
             }
 //            findBestColor(hsv, new Point(0,0), colorData);
 //getColorData(region1_hsv, colorData);
@@ -475,6 +497,9 @@ public class CameraColorSensor {
                     color = colorScalars.get(Color_Enum.Color_Green);
                 } else if (region_colorData.get(region).get(Color_Enum.Color_Yellow).color == Color_Enum.Color_Yellow) {
                     telemetryData.add(new TelemetryData("Yellow score", region_colorData.get(region).get(Color_Enum.Color_Yellow).score));
+                    color = colorScalars.get(Color_Enum.Color_Yellow);
+                } else if (region_colorData.get(region).get(Color_Enum.Color_Purple).color == Color_Enum.Color_Purple) {
+                    telemetryData.add(new TelemetryData("Purple score", region_colorData.get(region).get(Color_Enum.Color_Purple).score));
                     color = colorScalars.get(Color_Enum.Color_Yellow);
                 } else if (region_colorData.get(region).get(Color_Enum.Color_Red).score > 0) {
                     color = colorScalars.get(Color_Enum.Color_Red);
