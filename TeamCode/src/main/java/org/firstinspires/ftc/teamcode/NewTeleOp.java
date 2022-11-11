@@ -1,6 +1,8 @@
 package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.Servo;
+import org.firstinspires.ftc.teamcode.dependencies.LinearSlide;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 @TeleOp
@@ -13,6 +15,9 @@ public class NewTeleOp extends LinearOpMode {
         DcMotor motorBackLeft = hardwareMap.dcMotor.get("bLeft");
         DcMotor motorFrontRight = hardwareMap.dcMotor.get("right");
         DcMotor motorBackRight = hardwareMap.dcMotor.get("bRight");
+        DcMotor motorls = hardwareMap.dcMotor.get("ls");
+        Servo claw = hardwareMap.servo.get("claw");
+
 
         motorFrontLeft.setDirection(DcMotor.Direction.REVERSE);
         motorBackLeft.setDirection(DcMotor.Direction.REVERSE);
@@ -39,6 +44,22 @@ public class NewTeleOp extends LinearOpMode {
             motorBackLeft.setPower(backLeftPower);
             motorFrontRight.setPower(frontRightPower);
             motorBackRight.setPower(backRightPower);
+
+            //if a is pressed, set LinearPosition to ZERO
+            LinearSlide linslde = new LinearSlide(motorls, claw, this);
+            if(gamepad1.a){
+                linslde.moveToPosition(LinearSlide.LinearPosition.ZERO, 1.0);
+           }
+            else if(gamepad1.x){
+                linslde.moveToPosition(LinearSlide.LinearPosition.ONE, 1.0);
+            }
+            else if(gamepad1.y){
+                linslde.moveToPosition(LinearSlide.LinearPosition.TWO, 1.0);
+            }
+            else if(gamepad1.b){
+                linslde.moveToPosition(LinearSlide.LinearPosition.THREE, 1.0);
+            }
+
         }
     }
 }
