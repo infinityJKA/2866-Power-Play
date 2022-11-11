@@ -60,25 +60,25 @@ public class Terminal {
             default:
                 throw new IllegalArgumentException("Position must be LEFT or RIGHT!");
         }
-        // int rotator = allianceSide.LEFT ? -1:1;
-//        if (linearOpMode.opModeIsActive()) {
-//            mecanumEncoder.moveInches(direction.FORWARD, 74, 1);
-//            mecanumEncoder.rotateDegrees(rotation.CCW, 90 * rotator, 1);
-//            mecanumEncoder.moveInches(direction.FORWARD, 3.25, 1);
-////            linearSlide.moveToPosition(LinearPosition.THREE, 1);
-//            mecanumEncoder.moveInches(direction.BACKWARD, 3.25, 1);
-//            mecanumEncoder.rotateDegrees(rotation.CW, 90 * rotator, 1);
-//            mecanumEncoder.moveInches(direction.BACKWARD, 15.5, 1);
-//            mecanumEncoder.rotateDegrees(rotation.CW, 90 * rotator, 1);
-//            mecanumEncoder.moveInches(direction.FORWARD, 22.25, 1);
-////            linearSlide.moveToPosition(LinearPosition.ONE, 1);
-//            mecanumEncoder.moveInches(direction.BACKWARD, 22.25, 1);
-//            mecanumEncoder.rotateDegrees(rotation.CCW, 90 * rotator, 1);
-//            mecanumEncoder.moveInches(direction.FORWARD, 15.5, 1);
-//            mecanumEncoder.rotateDegrees(rotation.CCW, 90 * rotator, 1);
-//            mecanumEncoder.moveInches(direction.FORWARD, 3.25, 1);
-//
-//        }
+//         int rotator = allianceSide.LEFT ? -1:1;
+        if (linearOpMode.opModeIsActive()) {
+            mecanumEncoder.moveInches(direction.FORWARD, 54.5, 1);
+            for (int i = 0; i < 3; i++){
+                mecanumEncoder.rotateDegrees(rotation.CCW, 90 * rotator, 1);
+                mecanumEncoder.moveInches(direction.FORWARD, 3.25, 1);
+                mecanumEncoder.rotateDegrees(rotation.CW, 90 * rotator, 1);
+                mecanumEncoder.moveInches(direction.FORWARD, 3.25, 1);
+                //            linearSlide.moveToPosition(LinearPosition.THREE, 1);
+                mecanumEncoder.moveInches(direction.BACKWARD, 3.25, 1);
+                mecanumEncoder.rotateDegrees(rotation.CW, 90 * rotator, 1);
+                mecanumEncoder.moveInches(direction.FORWARD, 29, 1);
+                mecanumEncoder.moveInches(direction.BACKWARD, 29, 1);
+                mecanumEncoder.rotateDegrees(rotation.CCW, 90 * rotator, 1);
+            }
+//            linearSlide.moveToPosition(LinearPosition.ONE, 1);
+
+
+        }
 
     }
 }
