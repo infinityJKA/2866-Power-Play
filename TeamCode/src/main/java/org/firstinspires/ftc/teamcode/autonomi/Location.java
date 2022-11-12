@@ -15,7 +15,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.teamcode.dependencies.ColorSensor;
-import org.firstinspires.ftc.teamcode.dependencies.Parking;
+import org.firstinspires.ftc.teamcode.enums.Parking;
 import org.firstinspires.ftc.teamcode.enums.AllianceSide;
 
 

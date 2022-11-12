@@ -8,14 +8,16 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.enums.AllianceSide;
+import org.firstinspires.ftc.teamcode.enums.ColorSide;
 import org.firstinspires.ftc.teamcode.enums.Direction;
+import org.firstinspires.ftc.teamcode.enums.Parking;
 
 public class Terminal {
     private static DcMotor frontLeftMotor, frontRightMotor, backLeftMotor, backRightMotor, linearSlide;
     
     private static BNO055IMU imu;
 
-    public static void run(LinearOpMode linearOpMode, AllianceSide allianceSide) {
+    public static void run(LinearOpMode linearOpMode, AllianceSide allianceSide, ColorSide colorSide) {
         frontLeftMotor = linearOpMode.hardwareMap.get(DcMotor.class, "left");
         frontRightMotor = linearOpMode.hardwareMap.get(DcMotor.class, "right");
         backLeftMotor = linearOpMode.hardwareMap.get(DcMotor.class, "bLeft");
@@ -33,23 +35,20 @@ public class Terminal {
         // me when cola & fortnite
         linearOpMode.telemetry.speak("yippie!");
 
-        // R = Red
-        // B = Blue
+        // D = Dual (Red/Blue)
+        // Y = Yellow
         // G = Green
         Parking parking;
         if (colorSensor.isRegionGreen(0)) {
             parking = Parking.G;
             linearOpMode.telemetry.speak("Green");
-        } else if (colorSensor.isRegionYellow(0)){
-                parking = Parking.G;
-                linearOpMode.telemetry.speak("Yellow");
-        } else if (colorSensor.isRegionBlue(0)){
-            parking = Parking.B;
-            linearOpMode.telemetry.speak("Blue");
+        } else if (colorSensor.isRegionYellow(0)) {
+            parking = Parking.Y;
+            linearOpMode.telemetry.speak("Yellow");
         }
         else{
-            parking = Parking.R;
-            linearOpMode.telemetry.speak("Red");
+            parking = Parking.D;
+            linearOpMode.telemetry.speak("Yippie!");
         }
 
         int rotator = 0;

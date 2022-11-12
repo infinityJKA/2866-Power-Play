@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.dependencies.Terminal;
 import org.firstinspires.ftc.teamcode.enums.AllianceSide;
+import org.firstinspires.ftc.teamcode.enums.ColorSide;
 
 
 @Autonomous(name="TerminalSideLeft", group="Autonomous")
@@ -13,6 +14,6 @@ import org.firstinspires.ftc.teamcode.enums.AllianceSide;
 public class TerminalSideLeft extends LinearOpMode{
     @Override
     public void runOpMode() throws InterruptedException{
-        Terminal.run(this, AllianceSide.LEFT);
+        Terminal.run(this, AllianceSide.LEFT, ColorSide.BLUE);
     }
 }
