@@ -37,9 +37,12 @@ public class Terminal {
         // B = Blue
         // G = Green
         Parking parking;
-        if (colorSensor.isRegionGreen(0)){
+        if (colorSensor.isRegionGreen(0)) {
             parking = Parking.G;
             linearOpMode.telemetry.speak("Green");
+        } else if (colorSensor.isRegionYellow(0)){
+                parking = Parking.G;
+                linearOpMode.telemetry.speak("Yellow");
         } else if (colorSensor.isRegionBlue(0)){
             parking = Parking.B;
             linearOpMode.telemetry.speak("Blue");
@@ -61,24 +64,24 @@ public class Terminal {
                 throw new IllegalArgumentException("Position must be LEFT or RIGHT!");
         }
 //         int rotator = allianceSide.LEFT ? -1:1;
-        if (linearOpMode.opModeIsActive()) {
-            mecanumEncoder.moveInches(direction.FORWARD, 54.5, 1);
-            for (int i = 0; i < 3; i++){
-                mecanumEncoder.rotateDegrees(rotation.CCW, 90 * rotator, 1);
-                mecanumEncoder.moveInches(direction.FORWARD, 3.25, 1);
-                mecanumEncoder.rotateDegrees(rotation.CW, 90 * rotator, 1);
-                mecanumEncoder.moveInches(direction.FORWARD, 3.25, 1);
-                //            linearSlide.moveToPosition(LinearPosition.THREE, 1);
-                mecanumEncoder.moveInches(direction.BACKWARD, 3.25, 1);
-                mecanumEncoder.rotateDegrees(rotation.CW, 90 * rotator, 1);
-                mecanumEncoder.moveInches(direction.FORWARD, 29, 1);
-                mecanumEncoder.moveInches(direction.BACKWARD, 29, 1);
-                mecanumEncoder.rotateDegrees(rotation.CCW, 90 * rotator, 1);
-            }
-//            linearSlide.moveToPosition(LinearPosition.ONE, 1);
-
-
-        }
+//        if (linearOpMode.opModeIsActive()) {
+//            mecanumEncoder.moveInches(direction.FORWARD, 54.5, 1);
+//            for (int i = 0; i < 3; i++){
+//                mecanumEncoder.rotateDegrees(rotation.CCW, 90 * rotator, 1);
+//                mecanumEncoder.moveInches(direction.FORWARD, 3.25, 1);
+//                mecanumEncoder.rotateDegrees(rotation.CW, 90 * rotator, 1);
+//                mecanumEncoder.moveInches(direction.FORWARD, 3.25, 1);
+//                //            linearSlide.moveToPosition(LinearPosition.THREE, 1);
+//                mecanumEncoder.moveInches(direction.BACKWARD, 3.25, 1);
+//                mecanumEncoder.rotateDegrees(rotation.CW, 90 * rotator, 1);
+//                mecanumEncoder.moveInches(direction.FORWARD, 29, 1);
+//                mecanumEncoder.moveInches(direction.BACKWARD, 29, 1);
+//                mecanumEncoder.rotateDegrees(rotation.CCW, 90 * rotator, 1);
+//            }
+////            linearSlide.moveToPosition(LinearPosition.ONE, 1);
+//
+//
+//        }
 
     }
 }
