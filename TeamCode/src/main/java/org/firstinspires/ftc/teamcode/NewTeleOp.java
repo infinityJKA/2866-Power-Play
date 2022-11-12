@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Servo;
 import org.firstinspires.ftc.teamcode.dependencies.LinearSlide;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.util.Range;
 
 @TeleOp
 public class NewTeleOp extends LinearOpMode {
@@ -17,6 +18,9 @@ public class NewTeleOp extends LinearOpMode {
         DcMotor motorBackRight = hardwareMap.dcMotor.get("bRight");
         DcMotor motorls = hardwareMap.dcMotor.get("ls");
         Servo claw = hardwareMap.servo.get("claw");
+        double gripPosition = 0;
+        double MIN_POS = 0, MAX_POS = 1;
+        gripPosition = MAX_POS;
 
 
         motorFrontLeft.setDirection(DcMotor.Direction.REVERSE);
@@ -27,6 +31,7 @@ public class NewTeleOp extends LinearOpMode {
         if (isStopRequested()) return;
 
         while (opModeIsActive()) {
+            claw.setPosition(Range.clip(gripPosition, MIN_POS, MAX_POS));
             double y = -gamepad1.left_stick_y; // Remember, this is reversed!
             double x = gamepad1.left_stick_x * 1.1; // Counteract imperfect strafing
             double rx = gamepad1.right_stick_x;
@@ -49,7 +54,7 @@ public class NewTeleOp extends LinearOpMode {
             LinearSlide linslde = new LinearSlide(motorls, claw, this);
             if(gamepad1.a){
                 linslde.moveToPosition(LinearSlide.LinearPosition.ZERO, 1.0);
-           }
+            }
             else if(gamepad1.x){
                 linslde.moveToPosition(LinearSlide.LinearPosition.ONE, 1.0);
             }
@@ -59,7 +64,12 @@ public class NewTeleOp extends LinearOpMode {
             else if(gamepad1.b){
                 linslde.moveToPosition(LinearSlide.LinearPosition.THREE, 1.0);
             }
-
+            if (gamepad1.left_bumper) {
+                linslde.openClaw();
+            }
+            else if (gamepad1.right_bumper) {
+                linslde.closeClaw();
+            }
         }
     }
 }
