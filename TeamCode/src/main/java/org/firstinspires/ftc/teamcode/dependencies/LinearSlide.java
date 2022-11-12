@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.dependencies;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.teamcode.enums.Levels;
 
@@ -49,6 +50,15 @@ public class LinearSlide {
         }
         linearSlideMotor.setPower(0);
     }
-    public void openClaw(){}
+    public void openClaw(){
+        changeClawPos(0.1);
+    }
+    public void closeClaw(){
+        changeClawPos(1);
+    }
+    public void changeClawPos(double position){
+        this.claw.setPosition(Range.clip(position, MIN_POS, MAX_POS));
+    }
+
 
 }
