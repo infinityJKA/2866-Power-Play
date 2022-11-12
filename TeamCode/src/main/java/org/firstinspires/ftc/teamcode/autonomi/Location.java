@@ -51,11 +51,11 @@ public class Location {
         Parking parking;
         if (colorSensor.isRegionGreen(0)){
             parking = Parking.G;
-        } else if (colorSensor.isRegionBlue(0)){
-            parking = Parking.B;
+        } else if (colorSensor.isRegionYellow(0)){
+            parking = Parking.Y;
         }
         else{
-            parking = Parking.R;
+            parking = Parking.D;
         }
 
 
