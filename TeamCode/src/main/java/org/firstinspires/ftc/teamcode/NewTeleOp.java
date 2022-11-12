@@ -19,6 +19,7 @@ public class NewTeleOp extends LinearOpMode {
         DcMotor motorBackRight = hardwareMap.dcMotor.get("bRight");
         DcMotor motorls = hardwareMap.dcMotor.get("ls");
         Servo claw = hardwareMap.servo.get("claw");
+        LinearSlide linslde = new LinearSlide(motorls, claw, this);
         double gripPosition = 0;
         double MIN_POS = 0, MAX_POS = 1;
         gripPosition = MAX_POS;
@@ -26,7 +27,7 @@ public class NewTeleOp extends LinearOpMode {
 
         motorFrontLeft.setDirection(DcMotor.Direction.REVERSE);
         motorBackLeft.setDirection(DcMotor.Direction.REVERSE);
-
+        linslde.closeClaw();
         waitForStart();
 
         if (isStopRequested()) return;
@@ -52,7 +53,7 @@ public class NewTeleOp extends LinearOpMode {
             motorBackRight.setPower(backRightPower);
 
             //if a is pressed, set LinearPosition to ZERO
-            LinearSlide linslde = new LinearSlide(motorls, claw, this);
+
             if(gamepad1.a){
                 linslde.moveToPosition(LinearSlide.LinearPosition.ZERO, 1.0);
             }

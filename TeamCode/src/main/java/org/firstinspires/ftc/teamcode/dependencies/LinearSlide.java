@@ -51,9 +51,11 @@ public class LinearSlide {
         linearSlideMotor.setPower(0);
     }
     public void openClaw(){
-        changeClawPos(0.1);
+        changeClawPos(0);
+
     }
     public void closeClaw(){
+
         changeClawPos(1);
     }
     public void changeClawPos(double position){
