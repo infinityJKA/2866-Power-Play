@@ -1,10 +1,11 @@
 package org.firstinspires.ftc.teamcode;
+
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.Servo;
-import org.firstinspires.ftc.teamcode.dependencies.LinearSlide;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.util.Range;
+import com.qualcomm.robotcore.hardware.Servo;
+
+import org.firstinspires.ftc.teamcode.dependencies.LinearSlide;
 
 @TeleOp
 public class NewTeleOp extends LinearOpMode {
@@ -31,7 +32,7 @@ public class NewTeleOp extends LinearOpMode {
         if (isStopRequested()) return;
 
         while (opModeIsActive()) {
-            claw.setPosition(Range.clip(gripPosition, MIN_POS, MAX_POS));
+//            claw.setPosition(Range.clip(gripPosition, MIN_POS, MAX_POS));
             double y = -gamepad1.left_stick_y; // Remember, this is reversed!
             double x = gamepad1.left_stick_x * 1.1; // Counteract imperfect strafing
             double rx = gamepad1.right_stick_x;
