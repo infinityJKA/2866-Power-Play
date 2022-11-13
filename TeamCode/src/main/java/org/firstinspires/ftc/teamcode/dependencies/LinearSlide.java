@@ -71,6 +71,10 @@ public class LinearSlide {
     public void changeClawPos(double position){
         this.claw.setPosition(Range.clip(position, MIN_POS, MAX_POS));
     }
+    public void setPower(double power){
+        linearSlideMotor.setPower(power);
+    }
+
 
 
 }
