@@ -4,7 +4,6 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
-
 import org.firstinspires.ftc.teamcode.enums.Levels;
 
 public class LinearSlide {
@@ -15,7 +14,7 @@ public class LinearSlide {
     private LinearOpMode linearOp;
 
     // math.pi*2
-    // Heights for da thingies: 37 in, 25 in, 17 in
+    // Heights for the poles: 37 in, 25 in, 17 in
 
     private final int t = 1440;
     private final double MIN_POS = 0, MAX_POS = 1;
