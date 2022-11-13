@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
+
 import org.firstinspires.ftc.teamcode.enums.Levels;
 
 public class LinearSlide {
@@ -14,13 +15,13 @@ public class LinearSlide {
     private LinearOpMode linearOp;
 
     // math.pi*2
-    // Heights for the poles: 37 in, 25 in, 17 in
+    // Heights for da thingies: 37 in, 25 in, 17 in
 
     private final int t = 1440;
     private final double MIN_POS = 0, MAX_POS = 1;
 
     public enum LinearPosition {
-        ZERO(0), ONE(3500), TWO(5650), THREE(8400);
+        ZERO(0), ONE(3500), TWO(5650), THREE(8400), CONE1(200), CONE2(400), CONE3(600);
         private final int ticks;
         LinearPosition(int i){this.ticks = i;}
     }
@@ -35,6 +36,18 @@ public class LinearSlide {
             linearSlideMotor.setDirection(DcMotor.Direction.REVERSE);
 
         }
+    }
+    public void placeCone(LinearPosition pos, double power){
+        moveToPosition(pos, power);
+        openClaw();
+    }
+    public void pickupCone(double power){
+        moveToPosition(LinearPosition.ZERO, power);
+        closeClaw();
+    }
+    public void pickupCone(LinearPosition pos, double power){
+        moveToPosition(pos, power);
+        closeClaw();
     }
     public void moveToPosition(LinearPosition pos, double power){
         if (linearSlideMotor.getMode() != DcMotor.RunMode.RUN_TO_POSITION){
@@ -51,10 +64,8 @@ public class LinearSlide {
     }
     public void openClaw(){
         changeClawPos(0);
-
     }
     public void closeClaw(){
-
         changeClawPos(1);
     }
     public void changeClawPos(double position){
