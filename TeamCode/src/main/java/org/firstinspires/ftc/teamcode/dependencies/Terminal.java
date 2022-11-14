@@ -46,6 +46,19 @@ public class Terminal {
             parking = Parking.G;
             linearOpMode.telemetry.speak("Green");
         } else if (colorSensor.isRegionYellow(0)) {
+
+
+
+
+
+
+
+
+
+
+
+
+
             parking = Parking.Y;
             linearOpMode.telemetry.speak("Yellow");
         }
@@ -67,6 +80,7 @@ public class Terminal {
         }
 //        int rotator = allianceSide.LEFT ? -1:1;
         if (linearOpMode.opModeIsActive()) {
+            linSlide.closeClaw();
             mecanumEncoder.moveInches(direction.FORWARD, 54.5, 1);
             for (int i = 1; i < 4; i++){
                 mecanumEncoder.rotateDegrees(rotation.CCW, 90 * rotator, 1);

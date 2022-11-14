@@ -11,6 +11,8 @@ public class LinearSlide {
     private Servo claw;
     private LinearOpMode linearOp;
     public LinearPosition currentLinearPosition = LinearPosition.ZERO;
+    public boolean isOpen = true;
+
 
     // math.pi*2
     // Heights for da thingies: 37 in, 25 in, 17 in
@@ -49,8 +51,8 @@ public class LinearSlide {
         closeClaw();
     }
     public void moveToPosition(LinearPosition pos, double power){
-        if (!currentLinearPosition.equals(pos)){
-            currentLinearPosition = pos;
+//        if (!currentLinearPosition.equals(pos)){
+//            currentLinearPosition = pos;
             if (linearSlideMotor.getMode() != DcMotor.RunMode.RUN_TO_POSITION){
                 linearSlideMotor.setTargetPosition(0);
                 linearSlideMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -62,19 +64,18 @@ public class LinearSlide {
                 Thread.yield();
             }
             linearSlideMotor.setPower(0);
-        }
+//        }
     }
 
 
-    public boolean clawOpen = true;
 
     public void openClaw(){
-        changeClawPos(0);
-        clawOpen = true;
+        changeClawPos(1);
+        isOpen = true;
     }
     public void closeClaw(){
-        changeClawPos(1);
-        clawOpen = false;
+        changeClawPos(0);
+        isOpen = false;
     }
     public void changeClawPos(double position){
         this.claw.setPosition(Range.clip(position, MIN_POS, MAX_POS));

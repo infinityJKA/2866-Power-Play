@@ -22,6 +22,8 @@ public class NewTeleOp extends LinearOpMode {
         double gripPosition = 0;
         double MIN_POS = 0, MAX_POS = 1;
         gripPosition = MAX_POS;
+        boolean isOpen = true;
+
 
         LinearSlide.LinearPosition slidePos = LinearSlide.LinearPosition.ZERO;
 
@@ -55,22 +57,21 @@ public class NewTeleOp extends LinearOpMode {
 
             //if a is pressed, set LinearPosition to ZERO
             LinearSlide linslde = new LinearSlide(motorls, claw, this);
-            if(gamepad1.a && !linslde.clawOpen){
+            if(gamepad1.a){
                 linslde.moveToPosition(LinearSlide.LinearPosition.ZERO, 1.0);
                 slidePos = LinearSlide.LinearPosition.ZERO;
             }
-            else if(slidePos != LinearSlide.LinearPosition.ZERO && !linslde.clawOpen) {
-                if (gamepad1.x) {
-                    linslde.moveToPosition(LinearSlide.LinearPosition.ONE, 1.0);
-                    slidePos = LinearSlide.LinearPosition.ONE;
-                } else if (gamepad1.y) {
-                    linslde.moveToPosition(LinearSlide.LinearPosition.TWO, 1.0);
-                    slidePos = LinearSlide.LinearPosition.TWO;
-                } else if (gamepad1.b) {
-                    linslde.moveToPosition(LinearSlide.LinearPosition.THREE, 1.0);
-                    slidePos = LinearSlide.LinearPosition.THREE;
-                }
+            else if (gamepad1.x) {
+                linslde.moveToPosition(LinearSlide.LinearPosition.ONE, 1.0);
+                slidePos = LinearSlide.LinearPosition.ONE;
+            } else if (gamepad1.y) {
+                linslde.moveToPosition(LinearSlide.LinearPosition.TWO, 1.0);
+                slidePos = LinearSlide.LinearPosition.TWO;
+            } else if (gamepad1.b) {
+                linslde.moveToPosition(LinearSlide.LinearPosition.THREE, 1.0);
+                slidePos = LinearSlide.LinearPosition.THREE;
             }
+
             if (gamepad1.left_bumper) {
                 linslde.openClaw();
             } else if (gamepad1.right_bumper) {
