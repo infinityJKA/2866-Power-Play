@@ -11,13 +11,14 @@ public class LinearSlide {
     private RobotParameters rP;
     private DcMotor linearSlideMotor;
     private Servo claw;
-    public Levels level;
     private LinearOpMode linearOp;
+    public LinearPosition currentLinearPosition = LinearPosition.ZERO;
 
     // math.pi*2
     // Heights for da thingies: 37 in, 25 in, 17 in
 
-    private final int t = 1440;
+//    private final int t = 1440;
+//    private final double MIN_POS = 0, MAX_POS = 1;private final int t = 1440;
     private final double MIN_POS = 0, MAX_POS = 1;
 
     public enum LinearPosition {
@@ -50,17 +51,20 @@ public class LinearSlide {
         closeClaw();
     }
     public void moveToPosition(LinearPosition pos, double power){
-        if (linearSlideMotor.getMode() != DcMotor.RunMode.RUN_TO_POSITION){
-            linearSlideMotor.setTargetPosition(0);
-            linearSlideMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        }
-        linearSlideMotor.setTargetPosition(pos.ticks);
-        linearSlideMotor.setPower(power);
+        if (!currentLinearPosition.equals(pos)){
+            currentLinearPosition = pos;
+            if (linearSlideMotor.getMode() != DcMotor.RunMode.RUN_TO_POSITION){
+                linearSlideMotor.setTargetPosition(0);
+                linearSlideMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            }
+            linearSlideMotor.setTargetPosition(pos.ticks);
+            linearSlideMotor.setPower(power);
 
-        while (linearSlideMotor.isBusy() && Math.abs(linearSlideMotor.getTargetPosition() - linearSlideMotor.getCurrentPosition()) > 10){
-            Thread.yield();
+            while (linearSlideMotor.isBusy() && Math.abs(linearSlideMotor.getTargetPosition() - linearSlideMotor.getCurrentPosition()) > 10){
+                Thread.yield();
+            }
+            linearSlideMotor.setPower(0);
         }
-        linearSlideMotor.setPower(0);
     }
     public void openClaw(){
         changeClawPos(0);
@@ -73,8 +77,6 @@ public class LinearSlide {
     }
     public void setPower(double power){
         linearSlideMotor.setPower(power);
+        currentLinearPosition = null;
     }
-
-
-
 }
