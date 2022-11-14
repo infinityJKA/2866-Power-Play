@@ -5,8 +5,6 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 
-import org.firstinspires.ftc.teamcode.enums.Levels;
-
 public class LinearSlide {
     private RobotParameters rP;
     private DcMotor linearSlideMotor;
@@ -66,11 +64,17 @@ public class LinearSlide {
             linearSlideMotor.setPower(0);
         }
     }
+
+
+    public boolean clawOpen = true;
+
     public void openClaw(){
         changeClawPos(0);
+        clawOpen = true;
     }
     public void closeClaw(){
         changeClawPos(1);
+        clawOpen = false;
     }
     public void changeClawPos(double position){
         this.claw.setPosition(Range.clip(position, MIN_POS, MAX_POS));

@@ -23,6 +23,8 @@ public class NewTeleOp extends LinearOpMode {
         double MIN_POS = 0, MAX_POS = 1;
         gripPosition = MAX_POS;
 
+        LinearSlide.LinearPosition slidePos = LinearSlide.LinearPosition.ZERO;
+
 
         motorFrontLeft.setDirection(DcMotor.Direction.REVERSE);
         motorBackLeft.setDirection(DcMotor.Direction.REVERSE);
@@ -53,27 +55,30 @@ public class NewTeleOp extends LinearOpMode {
 
             //if a is pressed, set LinearPosition to ZERO
             LinearSlide linslde = new LinearSlide(motorls, claw, this);
-            if(gamepad1.a){
+            if(gamepad1.a && !linslde.clawOpen){
                 linslde.moveToPosition(LinearSlide.LinearPosition.ZERO, 1.0);
+                slidePos = LinearSlide.LinearPosition.ZERO;
             }
-            else if(gamepad1.x){
-                linslde.moveToPosition(LinearSlide.LinearPosition.ONE, 1.0);
-            }
-            else if(gamepad1.y){
-                linslde.moveToPosition(LinearSlide.LinearPosition.TWO, 1.0);
-            }
-            else if(gamepad1.b){
-                linslde.moveToPosition(LinearSlide.LinearPosition.THREE, 1.0);
+            else if(slidePos != LinearSlide.LinearPosition.ZERO && !linslde.clawOpen) {
+                if (gamepad1.x) {
+                    linslde.moveToPosition(LinearSlide.LinearPosition.ONE, 1.0);
+                    slidePos = LinearSlide.LinearPosition.ONE;
+                } else if (gamepad1.y) {
+                    linslde.moveToPosition(LinearSlide.LinearPosition.TWO, 1.0);
+                    slidePos = LinearSlide.LinearPosition.TWO;
+                } else if (gamepad1.b) {
+                    linslde.moveToPosition(LinearSlide.LinearPosition.THREE, 1.0);
+                    slidePos = LinearSlide.LinearPosition.THREE;
+                }
             }
             if (gamepad1.left_bumper) {
                 linslde.openClaw();
-            }
-            else if (gamepad1.right_bumper) {
+            } else if (gamepad1.right_bumper) {
                 linslde.closeClaw();
             }
-            if (gamepad1.right_trigger > 0){
+            if (gamepad1.right_trigger > 0) {
                 linslde.setPower(gamepad1.right_trigger);
-            }else if (gamepad1.left_trigger > 0){
+            } else if (gamepad1.left_trigger > 0) {
                 linslde.setPower(-gamepad1.left_trigger);
             }
         }
