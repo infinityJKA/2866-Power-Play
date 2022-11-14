@@ -70,17 +70,17 @@ public class Terminal {
             mecanumEncoder.moveInches(direction.FORWARD, 54.5, 1);
             for (int i = 1; i < 4; i++){
                 mecanumEncoder.rotateDegrees(rotation.CCW, 90 * rotator, 1);
-                mecanumEncoder.moveInches(direction.FORWARD, 3.25, 1);
+                mecanumEncoder.moveInches(direction.FORWARD, 12, 1);
                 mecanumEncoder.rotateDegrees(rotation.CW, 90 * rotator, 1);
                 mecanumEncoder.moveInches(direction.FORWARD, 3.25, 1);
                 linSlide.placeCone(LinearPosition.THREE, 1);
                 mecanumEncoder.moveInches(direction.BACKWARD, 3.25, 1);
                 mecanumEncoder.rotateDegrees(rotation.CW, 90 * rotator, 1);
-                mecanumEncoder.moveInches(direction.FORWARD, 29, 1);
-                mecanumEncoder.moveInches(direction.BACKWARD, 29, 1);
+                mecanumEncoder.moveInches(direction.FORWARD, 37.75, 1);
+                mecanumEncoder.moveInches(direction.BACKWARD, 37.75, 1);
                 mecanumEncoder.rotateDegrees(rotation.CCW, 90 * rotator, 1);
                 LinearPosition coneEnum = LinearPosition.valueOf("CONE"+Integer.toString(i));
-                linSlide.pickupCone(coneEnum, 1);
+                linSlide.pickupCone(coneEnum,1);
             }
 
         }
