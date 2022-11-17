@@ -1,3 +1,5 @@
+
+
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -5,6 +7,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.dependencies.LinearSlide;
 
 @TeleOp
@@ -82,6 +85,8 @@ public class NewTeleOp extends LinearOpMode {
             } else if (gamepad1.left_trigger > 0) {
                 linslde.setPower(-gamepad1.left_trigger);
             }
+            telemetry.addData("Left trigger value: ", gamepad1.left_trigger);
+            telemetry.update();
         }
     }
 }
