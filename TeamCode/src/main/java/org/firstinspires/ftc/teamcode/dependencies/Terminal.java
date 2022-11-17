@@ -35,8 +35,7 @@ public class Terminal {
 
         linearOpMode.waitForStart();
 
-        // me when cola & fortnite
-        linearOpMode.telemetry.speak("yippie!");
+        linearOpMode.telemetry.speak("Autonomous has started!");
 
         // D = Dual (Red/Blue)
         // Y = Yellow
@@ -46,19 +45,6 @@ public class Terminal {
             parking = Parking.G;
             linearOpMode.telemetry.speak("Green");
         } else if (colorSensor.isRegionYellow(0)) {
-
-
-
-
-
-
-
-
-
-
-
-
-
             parking = Parking.Y;
             linearOpMode.telemetry.speak("Yellow");
         }
@@ -86,9 +72,10 @@ public class Terminal {
                 mecanumEncoder.rotateDegrees(rotation.CCW, 90 * rotator, 1);
                 mecanumEncoder.moveInches(direction.FORWARD, 12, 1);
                 mecanumEncoder.rotateDegrees(rotation.CW, 90 * rotator, 1);
-                mecanumEncoder.moveInches(direction.FORWARD, 3.25, 1);
+                mecanumEncoder.moveInches(direction.FORWARD, 4, 1);
                 linSlide.placeCone(LinearPosition.THREE, 1);
-                mecanumEncoder.moveInches(direction.BACKWARD, 3.25, 1);
+                linSlide.moveToPosition(LinearPosition.ZERO, 1);
+                mecanumEncoder.moveInches(direction.BACKWARD, 4, 1);
                 mecanumEncoder.rotateDegrees(rotation.CW, 90 * rotator, 1);
                 mecanumEncoder.moveInches(direction.FORWARD, 37.75, 1);
                 mecanumEncoder.moveInches(direction.BACKWARD, 37.75, 1);
