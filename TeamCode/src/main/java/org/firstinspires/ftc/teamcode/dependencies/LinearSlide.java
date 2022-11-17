@@ -44,11 +44,13 @@ public class LinearSlide {
         openClaw();
     }
     public void pickupCone(double power){
+        openClaw();
         moveToPosition(LinearPosition.ZERO, power);
         sleep(100);
         closeClaw();
     }
     public void pickupCone(LinearPosition pos, double power){
+        openClaw();
         moveToPosition(pos, power);
         sleep(100);
         closeClaw();
@@ -86,6 +88,7 @@ public class LinearSlide {
     }
     public void changeClawPos(double position){
         this.claw.setPosition(Range.clip(position, MIN_POS, MAX_POS));
+        sleep(100);
     }
     public void setPower(double power){
         linearSlideMotor.setPower(power);

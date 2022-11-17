@@ -7,7 +7,6 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
-import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.dependencies.LinearSlide;
 
 @TeleOp
@@ -53,7 +52,7 @@ public class NewTeleOp extends LinearOpMode {
             double frontRightPower = (y - x - rx) / denominator;
             double backRightPower = (y + x - rx) / denominator;
 
-            motorFrontLeft.setPower(frontLeftPower);
+            motorFrontLeft.setPower(frontLeftPower-0.2);
             motorBackLeft.setPower(backLeftPower);
             motorFrontRight.setPower(frontRightPower);
             motorBackRight.setPower(backRightPower);
