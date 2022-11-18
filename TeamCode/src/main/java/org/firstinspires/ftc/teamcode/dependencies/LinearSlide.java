@@ -58,7 +58,7 @@ public class LinearSlide {
     public void moveToPosition(LinearPosition pos, double power) {
 //        if (!currentLinearPosition.equals(pos)){
 //            currentLinearPosition = pos;
-        if (!(currentLinearPosition.equals(pos))) {
+//        if (!(currentLinearPosition.equals(pos))) {
             currentLinearPosition = pos;
             if (linearSlideMotor.getMode() != DcMotor.RunMode.RUN_TO_POSITION) {
                 linearSlideMotor.setTargetPosition(0);
@@ -71,7 +71,7 @@ public class LinearSlide {
                 Thread.yield();
             }
             linearSlideMotor.setPower(0);
-        }
+//        }
     }
 
 //        }
