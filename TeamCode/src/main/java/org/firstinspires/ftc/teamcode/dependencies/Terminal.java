@@ -1,117 +1,101 @@
 package org.firstinspires.ftc.teamcode.dependencies;
 
-
-import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.util.Range;
 
-import org.firstinspires.ftc.teamcode.enums.AllianceSide;
-import org.firstinspires.ftc.teamcode.enums.ColorSide;
-import org.firstinspires.ftc.teamcode.enums.Direction;
-import org.firstinspires.ftc.teamcode.enums.Parking;
+public class LinearSlide {
+    private RobotParameters rP;
+    private DcMotor linearSlideMotor;
+    private Servo claw;
+    private LinearOpMode linearOp;
+    public LinearPosition currentLinearPosition = LinearPosition.ZERO;
+    public boolean isOpen = true;
 
-public class Terminal {
-    private static DcMotor frontLeftMotor, frontRightMotor, backLeftMotor, backRightMotor, linearSlide;
-    private static Servo claw;
 
-    private static BNO055IMU imu;
+    // math.pi*2
+    // Heights for da thingies: 37 in, 25 in, 17 in
 
-    public static void run(LinearOpMode linearOpMode, AllianceSide allianceSide, ColorSide colorSide) {
-        frontLeftMotor = linearOpMode.hardwareMap.get(DcMotor.class, "left");
-        frontRightMotor = linearOpMode.hardwareMap.get(DcMotor.class, "right");
-        backLeftMotor = linearOpMode.hardwareMap.get(DcMotor.class, "bLeft");
-        backRightMotor = linearOpMode.hardwareMap.get(DcMotor.class, "bRight");
-        linearSlide = linearOpMode.hardwareMap.get(DcMotor.class, "ls");
-        imu = linearOpMode.hardwareMap.get(BNO055IMU.class, "imu");
-        claw = linearOpMode.hardwareMap.servo.get("claw");
-        RobotParameters rP = new RobotParameters(frontLeftMotor, frontRightMotor, backLeftMotor, backRightMotor, 1440, 2.6, 60, linearSlide, imu, 12.5);
-        MecanumEncoder mecanumEncoder = new MecanumEncoder(rP, linearOpMode);
-        LinearSlide linSlide = new LinearSlide(linearSlide, claw, linearOpMode);
-        Direction direction = null, rotation = null;
+    //    private final int t = 1440;
+//    private final double MIN_POS = 0, MAX_POS = 1;private final int t = 1440;
+    private final double MIN_POS = 0, MAX_POS = 1;
 
-        ColorSensor colorSensor = new ColorSensor("LiveLeak", linearOpMode.hardwareMap, linearOpMode);
+    public enum LinearPosition {
+        ZERO(25), ONE(3500), TWO(5650), THREE(8400), CONE1(200), CONE2(400), CONE3(600);
+        private final int ticks;
+        LinearPosition(int i){this.ticks = i;}
+    }
 
-        linearOpMode.waitForStart();
+    public LinearSlide(DcMotor linearSlideMotor, Servo claw, LinearOpMode linearOp){
+        this.linearSlideMotor = linearSlideMotor;
+        this.claw = claw;
+        this.linearOp = linearOp;
+        if (linearSlideMotor.getMode() != DcMotor.RunMode.RUN_TO_POSITION){
+            linearSlideMotor.setTargetPosition(0);
+            linearSlideMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            linearSlideMotor.setDirection(DcMotor.Direction.REVERSE);
 
-        linearOpMode.telemetry.speak("Autonomous has started!");
-
-        // D = Dual (Red/Blue)
-        // Y = Yellow
-        // G = Green
-        Parking parking = Parking.NOT_DECIDED;
-        if (colorSensor.isRegionGreen(1)) {
-            parking = Parking.G;
-            linearOpMode.telemetry.speak("Green");
-        } else if (colorSensor.isRegionYellow(1)) {
-            parking = Parking.Y;
-            linearOpMode.telemetry.speak("Yellow");
         }
-        else{
-            parking = Parking.D;
-            linearOpMode.telemetry.speak("Yippie!");
-        }
-
-        int rotator = 0;
-        switch (allianceSide) {
-            case LEFT:
-                rotator = -1;
-                break;
-            case RIGHT:
-                rotator = 1;
-                break;
-            default:
-                throw new IllegalArgumentException("Position must be LEFT or RIGHT!");
-        }
-//        int rotator = allianceSide.LEFT ? -1:1;
-        if (linearOpMode.opModeIsActive()) {
-//            linSlide.closeClaw();
-//            linSlide.moveToPosition(LinearPosition.ONE, 1);
-//            mecanumEncoder.moveInches(direction.FORWARD, 54.5, 1);
-////            for (int i = 1; i < 4; i++){
-//            mecanumEncoder.rotateDegrees(rotation.CCW, 90 * rotator, 1);
-//            mecanumEncoder.moveInches(direction.FORWARD, 12, 1);
-//            mecanumEncoder.rotateDegrees(rotation.CW, 90 * rotator, 1);
-//            linSlide.moveToPosition(LinearPosition.THREE, 1);
-//            mecanumEncoder.moveInches(direction.FORWARD, 4, 1);
-//            linSlide.moveToPosition(LinearPosition.ZERO, 1);
-//            mecanumEncoder.moveInches(direction.BACKWARD, 4, 1);
-////                mecanumEncoder.rotateDegrees(rotation.CW, 90 * rotator, 1);
-////                mecanumEncoder.moveInches(direction.FORWARD, 37.75, 1);
-////                mecanumEncoder.moveInches(direction.BACKWARD, 37.75, 1);
-////                mecanumEncoder.rotateDegrees(rotation.CCW, 90 * rotator, 1);
-////                LinearPosition coneEnum = LinearPosition.valueOf("CONE"+Integer.toString(i));
-////                linSlide.pickupCone(coneEnum,1);
-////            }
-//
-//            if(parking == Parking.G){
-//                mecanumEncoder.moveInches(direction.LEFT, 10*rotator, 1);
-//            }
-//            else if(parking == Parking.Y){
-//                mecanumEncoder.moveInches(direction.RIGHT, 10*rotator, 1);
-//            }
-//            else{
-//                mecanumEncoder.moveInches(direction.RIGHT, 25*rotator, 1);
-//            }
-
-            mecanumEncoder.moveInches(Direction.FORWARD, 28, 1);
-            if(parking == Parking.G){
-                mecanumEncoder.rotateDegrees(rotation.CCW, 90, 1);
-                mecanumEncoder.moveInches(direction.FORWARD, 24, 1);
-                mecanumEncoder.rotateDegrees(rotation.CW, 95, 1);
-                mecanumEncoder.moveInches(direction.FORWARD, 5, 1);
+    }
+    public void placeCone(LinearPosition pos, double power){
+        moveToPosition(pos, power);
+        sleep(100);
+        openClaw();
+    }
+    public void pickupCone(double power){
+        openClaw();
+        moveToPosition(LinearPosition.ZERO, power);
+        sleep(100);
+        closeClaw();
+    }
+    public void pickupCone(LinearPosition pos, double power){
+        openClaw();
+        moveToPosition(pos, power);
+        sleep(100);
+        closeClaw();
+    }
+    public void moveToPosition(LinearPosition pos, double power) {
+//        if (!currentLinearPosition.equals(pos)){
+//            currentLinearPosition = pos;
+//        if (!(currentLinearPosition.equals(pos))) {
+            currentLinearPosition = pos;
+            if (linearSlideMotor.getMode() != DcMotor.RunMode.RUN_TO_POSITION) {
+                linearSlideMotor.setTargetPosition(0);
             }
-            else if(parking == Parking.Y){
+            linearSlideMotor.setTargetPosition(pos.ticks);
+            linearSlideMotor.setPower(power);
+
+            while (linearSlideMotor.isBusy() && Math.abs(linearSlideMotor.getTargetPosition() - linearSlideMotor.getCurrentPosition()) > 10) {
                 Thread.yield();
             }
-            else{
-                mecanumEncoder.rotateDegrees(rotation.CW, 90, 1);
-                mecanumEncoder.moveInches(direction.FORWARD, 24, 1);
-                mecanumEncoder.rotateDegrees(rotation.CCW, 90, 1);
-                mecanumEncoder.moveInches(direction.FORWARD, 5, 1);
-            }
-
-        }
-
+            linearSlideMotor.setPower(0);
+//        }
     }
+
+//        }
+
+
+
+    public void openClaw(){
+        changeClawPos(1);
+        isOpen = true;
+    }
+    public void closeClaw(){
+        changeClawPos(0);
+        isOpen = false;
+    }
+    public void changeClawPos(double position){
+        this.claw.setPosition(Range.clip(position, MIN_POS, MAX_POS));
+        sleep(100);
+    }
+    public void setPower(double power){
+        linearSlideMotor.setPower(power);
+        currentLinearPosition = null;
+    }
+    public int getCurrentPosition(){
+        return linearSlideMotor.getCurrentPosition();
+    }
+
+    public void sleep(long milli){linearOp.sleep(milli);}
 }
