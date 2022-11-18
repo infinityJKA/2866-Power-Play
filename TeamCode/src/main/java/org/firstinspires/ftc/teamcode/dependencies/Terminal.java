@@ -39,7 +39,7 @@ public class Terminal {
         // D = Dual (Red/Blue)
         // Y = Yellow
         // G = Green
-        Parking parking = null;
+        Parking parking = Parking.NOT_DECIDED;
         if (colorSensor.isRegionGreen(1)) {
             parking = Parking.G;
             linearOpMode.telemetry.speak("Green");
@@ -47,7 +47,7 @@ public class Terminal {
             parking = Parking.Y;
             linearOpMode.telemetry.speak("Yellow");
         }
-        else if (colorSensor.isRegionBlue(1)){
+        else{
             parking = Parking.D;
             linearOpMode.telemetry.speak("Yippie!");
         }
@@ -107,7 +107,7 @@ public class Terminal {
             else{
                 mecanumEncoder.rotateDegrees(rotation.CW, 90, 1);
                 mecanumEncoder.moveInches(direction.FORWARD, 24, 1);
-                mecanumEncoder.rotateDegrees(rotation.CCW, 95, 1);
+                mecanumEncoder.rotateDegrees(rotation.CCW, 90, 1);
                 mecanumEncoder.moveInches(direction.FORWARD, 5, 1);
             }
 
