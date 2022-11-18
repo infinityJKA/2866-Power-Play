@@ -68,8 +68,8 @@ public class CameraColorSensor {
     public static int SquareSize = 5;           // p
     // ixel size of edge of squares for checking
     //public static Point[] RegionTopLeft = new Point[NumRegions];
-    public int RegionWidth = 20;
-    public int RegionHeight = 60;
+    public int RegionWidth = 60;
+    public int RegionHeight = 80;
     //public Region[] regions;
     public Point[] RegionTopLeft = {new Point(0, 98),new Point(181, 98), new Point(253, 98)};
     public static int MinSaturation = 100;
