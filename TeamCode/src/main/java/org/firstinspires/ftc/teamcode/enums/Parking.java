@@ -1,6 +1,6 @@
 package org.firstinspires.ftc.teamcode.enums;
 
 public enum Parking {
-        D, Y, G
+        D, Y, G, NOT_DECIDED
 
 }
