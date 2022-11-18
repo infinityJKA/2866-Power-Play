@@ -10,8 +10,8 @@ public class ColorSensor {
     CameraColorSensor camSensor;
     LinearOpMode linearOpMode;
     final Point[] DEFAULT_POINTS = {new Point(1, 30), new Point(90, 98), new Point(175, 30)};
-    final int DEFAULT_WIDTH = 80;
-    final int DEFAULT_HEIGHT = 90;
+    final int DEFAULT_WIDTH = 50;
+    final int DEFAULT_HEIGHT = 70;
     public ColorSensor(String cameraName, HardwareMap hardwareMap, LinearOpMode linearOpMode){
         camSensor = new CameraColorSensor(cameraName, hardwareMap, linearOpMode);
         this.linearOpMode = linearOpMode;
