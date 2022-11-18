@@ -17,12 +17,12 @@ public class LinearSlide {
     // math.pi*2
     // Heights for da thingies: 37 in, 25 in, 17 in
 
-//    private final int t = 1440;
+    //    private final int t = 1440;
 //    private final double MIN_POS = 0, MAX_POS = 1;private final int t = 1440;
     private final double MIN_POS = 0, MAX_POS = 1;
 
     public enum LinearPosition {
-        ZERO(0), ONE(3500), TWO(5650), THREE(8400), CONE1(200), CONE2(400), CONE3(600);
+        ZERO(100), ONE(3500), TWO(5650), THREE(8400), CONE1(200), CONE2(400), CONE3(600);
         private final int ticks;
         LinearPosition(int i){this.ticks = i;}
     }
@@ -40,32 +40,41 @@ public class LinearSlide {
     }
     public void placeCone(LinearPosition pos, double power){
         moveToPosition(pos, power);
+        sleep(100);
         openClaw();
     }
     public void pickupCone(double power){
+        openClaw();
         moveToPosition(LinearPosition.ZERO, power);
+        sleep(100);
         closeClaw();
     }
     public void pickupCone(LinearPosition pos, double power){
+        openClaw();
         moveToPosition(pos, power);
+        sleep(100);
         closeClaw();
     }
-    public void moveToPosition(LinearPosition pos, double power){
+    public void moveToPosition(LinearPosition pos, double power) {
 //        if (!currentLinearPosition.equals(pos)){
 //            currentLinearPosition = pos;
-            if (linearSlideMotor.getMode() != DcMotor.RunMode.RUN_TO_POSITION){
+//        if (!(currentLinearPosition.equals(pos))) {
+            currentLinearPosition = pos;
+            if (linearSlideMotor.getMode() != DcMotor.RunMode.RUN_TO_POSITION) {
                 linearSlideMotor.setTargetPosition(0);
                 linearSlideMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             }
             linearSlideMotor.setTargetPosition(pos.ticks);
             linearSlideMotor.setPower(power);
 
-            while (linearSlideMotor.isBusy() && Math.abs(linearSlideMotor.getTargetPosition() - linearSlideMotor.getCurrentPosition()) > 10){
+            while (linearSlideMotor.isBusy() && Math.abs(linearSlideMotor.getTargetPosition() - linearSlideMotor.getCurrentPosition()) > 10) {
                 Thread.yield();
             }
             linearSlideMotor.setPower(0);
 //        }
     }
+
+//        }
 
 
 
@@ -79,9 +88,15 @@ public class LinearSlide {
     }
     public void changeClawPos(double position){
         this.claw.setPosition(Range.clip(position, MIN_POS, MAX_POS));
+        sleep(100);
     }
     public void setPower(double power){
         linearSlideMotor.setPower(power);
         currentLinearPosition = null;
     }
+    public int getCurrentPosition(){
+        return linearSlideMotor.getCurrentPosition();
+    }
+
+    public void sleep(long milli){linearOp.sleep(milli);}
 }
