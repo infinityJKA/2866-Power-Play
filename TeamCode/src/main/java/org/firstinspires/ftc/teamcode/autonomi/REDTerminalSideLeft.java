@@ -9,7 +9,7 @@ import org.firstinspires.ftc.teamcode.enums.AllianceSide;
 import org.firstinspires.ftc.teamcode.enums.ColorSide;
 
 
-@Autonomous(name="TerminalSideLeft", group="Autonomous")
+@Autonomous(name="REDTerminalSideLeft", group="Autonomous")
 
 public class REDTerminalSideLeft extends LinearOpMode{
     @Override
