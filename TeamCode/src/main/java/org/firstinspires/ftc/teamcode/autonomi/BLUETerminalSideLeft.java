@@ -11,7 +11,7 @@ import org.firstinspires.ftc.teamcode.enums.ColorSide;
 
 @Autonomous(name="TerminalSideLeft", group="Autonomous")
 
-public class TerminalSideLeft extends LinearOpMode{
+public class BLUETerminalSideLeft extends LinearOpMode{
     @Override
     public void runOpMode() throws InterruptedException{
         Terminal.run(this, AllianceSide.LEFT, ColorSide.BLUE);

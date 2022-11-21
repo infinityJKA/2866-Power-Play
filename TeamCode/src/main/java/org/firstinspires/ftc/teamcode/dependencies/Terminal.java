@@ -37,18 +37,19 @@ public class Terminal {
         linearOpMode.telemetry.speak("Autonomous has started!");
 
         // D = Dual (Red/Blue)
+        // O = Other
         // Y = Yellow
         // G = Green
         Parking parking = Parking.NOT_DECIDED;
-        if (colorSensor.isRegionGreen(1)) {
-            parking = Parking.G;
-            linearOpMode.telemetry.speak("Green");
+        if ((colorSensor.isRegionBlue(1) && colorSide == ColorSide.RED) || (colorSensor.isRegionRed(1) && colorSide == ColorSide.BLUE)){
+            parking = Parking.D;
+            linearOpMode.telemetry.speak("DUAL");
         } else if (colorSensor.isRegionYellow(1)) {
             parking = Parking.Y;
             linearOpMode.telemetry.speak("Yellow");
         }
         else{
-            parking = Parking.D;
+            parking = Parking.O;
             linearOpMode.telemetry.speak("Yippie!");
         }
 
@@ -95,7 +96,7 @@ public class Terminal {
 //            }
             linearOpMode.telemetry.speak("sayonara");
             mecanumEncoder.moveInches(Direction.FORWARD, 28, 1);
-            if(parking == Parking.G){
+            if(parking == Parking.D){
                 mecanumEncoder.rotateDegrees(rotation.CCW, 90, 1);
                 mecanumEncoder.moveInches(direction.FORWARD, 24, 1);
                 mecanumEncoder.rotateDegrees(rotation.CW, 95, 1);
