@@ -22,7 +22,7 @@ public class LinearSlide {
     private final double MIN_POS = 0, MAX_POS = 1;
 
     public enum LinearPosition {
-        ZERO(25), ONE(3500), TWO(5650), THREE(8400), CONE1(200), CONE2(400), CONE3(600);
+        ZERO(10), ONE(3500), TWO(5650), THREE(8200), CONE1(200), CONE2(400), CONE3(600);
         private final int ticks;
         LinearPosition(int i){this.ticks = i;}
     }
@@ -57,8 +57,6 @@ public class LinearSlide {
     }
     public void moveToPosition(LinearPosition pos, double power) {
 //        if (!currentLinearPosition.equals(pos)){
-//            currentLinearPosition = pos;
-//        if (!(currentLinearPosition.equals(pos))) {
             currentLinearPosition = pos;
             if (linearSlideMotor.getMode() != DcMotor.RunMode.RUN_TO_POSITION) {
                 linearSlideMotor.setTargetPosition(0);
@@ -70,6 +68,7 @@ public class LinearSlide {
                 Thread.yield();
             }
             linearSlideMotor.setPower(0);
+
 //        }
     }
 

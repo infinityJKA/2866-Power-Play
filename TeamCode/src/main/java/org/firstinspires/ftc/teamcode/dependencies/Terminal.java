@@ -93,7 +93,7 @@ public class Terminal {
 //            else{
 //                mecanumEncoder.moveInches(direction.RIGHT, 25*rotator, 1);
 //            }
-
+            linearOpMode.telemetry.speak("sayonara");
             mecanumEncoder.moveInches(Direction.FORWARD, 28, 1);
             if(parking == Parking.G){
                 mecanumEncoder.rotateDegrees(rotation.CCW, 90, 1);
