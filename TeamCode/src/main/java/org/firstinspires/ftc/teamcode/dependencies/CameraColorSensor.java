@@ -273,7 +273,7 @@ public class CameraColorSensor {
         private SynchronizedTelemetryList synchronizedTelemetryData = new SynchronizedTelemetryList();
         public CameraColorSensor parent;
 
-        public DeterminationPipeline(CameraDistanceSensor parent) {
+        public DeterminationPipeline(CameraColorSensor parent) {
             colorScalars.put(Color_Enum.Color_None, new Scalar(0, 0, 0));
             colorScalars.put(Color_Enum.Color_Blue, new Scalar(0, 0, 255));
             colorScalars.put(Color_Enum.Color_Green, new Scalar(0, 255, 0));
