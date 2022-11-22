@@ -47,11 +47,22 @@ public class NewTeleOp extends LinearOpMode {
             // This ensures all the powers maintain the same ratio, but only when
             // at least one is out of the range [-1, 1]
             double denominator = Math.max(Math.abs(y) + Math.abs(x) + Math.abs(rx), 1);
-            double frontLeftPower = ((y + x + rx)*0.8) / denominator;
-            double backLeftPower = ((y - x + rx)*0.8) / denominator;
-            double frontRightPower = ((y - x - rx)*0.8) / denominator;
-            double backRightPower = ((y + x - rx)*0.8) / denominator;
+            double frontLeftPower = (Math.pow((y + x + rx),3) * 0.8) / denominator;
+            double backLeftPower = (Math.pow((y - x + rx),3) * 0.8) / denominator;
+            double frontRightPower = (Math.pow((y - x - rx),3) * 0.8) / denominator;
+            double backRightPower = (Math.pow((y + x - rx),3) * 0.8) / denominator;
 
+            if(gamepad1.dpad_left){
+                frontLeftPower = -0.7;
+                backLeftPower = 0.7;
+                backRightPower = -0.7;
+                frontRightPower = 0.7;
+            }else if(gamepad1.dpad_right ){
+                backRightPower = 0.7;
+                frontRightPower = -0.7;
+                frontLeftPower = 0.7;
+                backLeftPower = -0.7;
+            }
             motorFrontLeft.setPower(frontLeftPower);
             motorBackLeft.setPower(backLeftPower);
             motorFrontRight.setPower(frontRightPower);
@@ -87,7 +98,7 @@ public class NewTeleOp extends LinearOpMode {
             if (gamepad1.right_bumper && gripPosition < MAX_POS){
                 gripPosition += 0.05;
             }
-            if (gamepad1.left_bumper && gripPosition > MIN_POS){
+            else if (gamepad1.left_bumper && gripPosition > MIN_POS){
                 gripPosition -= 0.05;
             }
             linslde.changeClawPos(gripPosition);
