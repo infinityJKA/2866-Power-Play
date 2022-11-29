@@ -95,6 +95,19 @@ public class Terminal {
 //                mecanumEncoder.moveInches(direction.RIGHT, 25*rotator, 1);
 //            }
             linearOpMode.telemetry.speak("sayonara");
+//            mecanumEncoder.moveInches(Direction.FORWARD, 28, 1);
+            /*
+            The code below supposedly places a cone on the low junction then comes back to park
+
+            linSlide.closeClaw();
+            linSlide.moveToPosition(LinearSlide.LinearPosition.ONE, 0.8);
+            mecanumEncoder.rotateDegrees(Direction.CCW, 70, 1);
+            mecanumEncoder.moveInches(Direction.FORWARD, 4, 1);
+            linSlide.openClaw();
+            mecanumEncoder.moveInches(Direction.BACKWARD, 3, 1);
+            mecanumEncoder.rotateDegrees(Direction.CW, 70, 1);
+            * */
+
             mecanumEncoder.moveInches(Direction.FORWARD, 28, 1);
             if(parking == Parking.D){
                 mecanumEncoder.rotateDegrees(rotation.CCW, 90, 1);
