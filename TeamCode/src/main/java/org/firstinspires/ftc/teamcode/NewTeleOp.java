@@ -70,17 +70,16 @@ public class NewTeleOp extends LinearOpMode {
 
             //if a is pressed, set LinearPosition to ZERO
             LinearSlide linslde = new LinearSlide(motorls, claw, this);
-            if(gamepad1.a){
+            if(gamepad2.a){
                 linslde.moveToPosition(LinearSlide.LinearPosition.ZERO, 0.8);
                 slidePos = LinearSlide.LinearPosition.ZERO;
-            }
-            else if (gamepad1.x) {
+            } else if (gamepad2.x) {
                 linslde.moveToPosition(LinearSlide.LinearPosition.ONE, 0.8);
                 slidePos = LinearSlide.LinearPosition.ONE;
-            } else if (gamepad1.y) {
+            } else if (gamepad2.y) {
                 linslde.moveToPosition(LinearSlide.LinearPosition.TWO, 0.8);
                 slidePos = LinearSlide.LinearPosition.TWO;
-            } else if (gamepad1.b) {
+            } else if (gamepad2.b) {
                 linslde.moveToPosition(LinearSlide.LinearPosition.THREE, 0.8);
                 slidePos = LinearSlide.LinearPosition.THREE;
             }
@@ -90,20 +89,25 @@ public class NewTeleOp extends LinearOpMode {
 //            } else if (gamepad1.right_bumper) {
 //                linslde.closeClaw();
 //            }
-            if (gamepad1.right_trigger > 0) {
-                linslde.setPower(gamepad1.right_trigger);
-            } else if (gamepad1.left_trigger > 0) {
-                linslde.setPower(-gamepad1.left_trigger);
+            if (gamepad2.right_trigger > 0) {
+                linslde.setPower(gamepad2.right_trigger);
+            } else if (gamepad2.left_trigger > 0) {
+                linslde.setPower(-gamepad2.left_trigger);
             }
-            if (gamepad1.right_bumper && gripPosition < MAX_POS){
+            if (gamepad2.right_bumper && gripPosition < MAX_POS){
                 gripPosition += 0.05;
             }
-            else if (gamepad1.left_bumper && gripPosition > MIN_POS){
+            else if (gamepad2.left_bumper && gripPosition > MIN_POS){
                 gripPosition -= 0.05;
             }
             linslde.changeClawPos(gripPosition);
+            if(gamepad2.dpad_right){
+               linslde.openClaw();
+            } else if (gamepad2.dpad_left){
+                linslde.closeClaw();
+            }
 
-            telemetry.addData("Left trigger value: ", gamepad1.left_trigger);
+            telemetry.addData("Left trigger value: ", gamepad2.left_trigger);
             telemetry.update();
         }
     }
