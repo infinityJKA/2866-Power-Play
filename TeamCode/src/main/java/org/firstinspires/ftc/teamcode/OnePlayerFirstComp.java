@@ -1,5 +1,3 @@
-
-
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -47,10 +45,10 @@ public class OnePlayerFirstComp extends LinearOpMode {
             // This ensures all the powers maintain the same ratio, but only when
             // at least one is out of the range [-1, 1]
             double denominator = Math.max(Math.abs(y) + Math.abs(x) + Math.abs(rx), 1);
-            double frontLeftPower = ((y + x + rx)*0.8) / denominator;
-            double backLeftPower = ((y - x + rx)*0.8) / denominator;
-            double frontRightPower = ((y - x - rx)*0.8) / denominator;
-            double backRightPower = ((y + x - rx)*0.8) / denominator;
+            double frontLeftPower = (Math.pow((y + x + rx),3) * 0.8) / denominator;
+            double backLeftPower = (Math.pow((y - x + rx),3) * 0.8) / denominator;
+            double frontRightPower = (Math.pow((y - x - rx),3) * 0.8) / denominator;
+            double backRightPower = (Math.pow((y + x - rx),3) * 0.8) / denominator;
 
             motorFrontLeft.setPower(frontLeftPower);
             motorBackLeft.setPower(backLeftPower);
@@ -85,10 +83,10 @@ public class OnePlayerFirstComp extends LinearOpMode {
                 linslde.setPower(-gamepad1.left_trigger);
             }
             if (gamepad1.right_bumper && gripPosition < MAX_POS){
-                gripPosition += 0.05;
+                gripPosition += 0.1;
             }
             if (gamepad1.left_bumper && gripPosition > MIN_POS){
-                gripPosition -= 0.05;
+                gripPosition -= 0.1;
             }
             linslde.changeClawPos(gripPosition);
 
