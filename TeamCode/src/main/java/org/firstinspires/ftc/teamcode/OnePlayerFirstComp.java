@@ -19,10 +19,10 @@ public class OnePlayerFirstComp extends LinearOpMode {
         DcMotor motorBackRight = hardwareMap.dcMotor.get("bRight");
         DcMotor motorls = hardwareMap.dcMotor.get("ls");
         Servo claw = hardwareMap.servo.get("claw");
-        double gripPosition = 0;
-        double MIN_POS = 0, MAX_POS = 1;
-        gripPosition = MAX_POS;
-        boolean isOpen = true;
+//        double gripPosition = 0;
+//        double MIN_POS = 0, MAX_POS = 1;
+//        gripPosition = MAX_POS;
+//        boolean isOpen = true;
 
 
         LinearSlide.LinearPosition slidePos = LinearSlide.LinearPosition.ZERO;
@@ -58,7 +58,7 @@ public class OnePlayerFirstComp extends LinearOpMode {
             //if a is pressed, set LinearPosition to ZERO
             LinearSlide linslde = new LinearSlide(motorls, claw, this);
             if(gamepad1.a){
-                linslde.moveToPosition(LinearSlide.LinearPosition.ZERO, 0.8);
+                linslde.moveToPosition(LinearSlide.LinearPosition.ZERO, 0.5);
                 slidePos = LinearSlide.LinearPosition.ZERO;
             }
             else if (gamepad1.x) {
@@ -82,14 +82,12 @@ public class OnePlayerFirstComp extends LinearOpMode {
             } else if (gamepad1.left_trigger > 0) {
                 linslde.setPower(-gamepad1.left_trigger);
             }
-            if (gamepad1.right_bumper && gripPosition < MAX_POS){
-                gripPosition += 0.1;
+            if (gamepad1.right_bumper){
+                linslde.openClaw();
             }
-            if (gamepad1.left_bumper && gripPosition > MIN_POS){
-                gripPosition -= 0.1;
+            if (gamepad1.left_bumper){
+                linslde.closeClaw();
             }
-            linslde.changeClawPos(gripPosition);
-
             telemetry.addData("Left trigger value: ", gamepad1.left_trigger);
             telemetry.update();
         }
