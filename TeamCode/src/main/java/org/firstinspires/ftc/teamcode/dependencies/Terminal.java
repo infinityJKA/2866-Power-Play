@@ -25,7 +25,7 @@ public class Terminal {
         linearSlide = linearOpMode.hardwareMap.get(DcMotor.class, "ls");
         imu = linearOpMode.hardwareMap.get(BNO055IMU.class, "imu");
         claw = linearOpMode.hardwareMap.servo.get("claw");
-        RobotParameters rP = new RobotParameters(frontLeftMotor, frontRightMotor, backLeftMotor, backRightMotor, 1440, 2.6, 60, linearSlide, imu, 12.5);
+        RobotParameters rP = new RobotParameters(frontLeftMotor, frontRightMotor, backLeftMotor, backRightMotor, 1440, 2.6, 60, linearSlide, imu, 11);
         MecanumEncoder mecanumEncoder = new MecanumEncoder(rP, linearOpMode);
         LinearSlide linSlide = new LinearSlide(linearSlide, claw, linearOpMode);
         Direction direction = null, rotation = null;
@@ -70,7 +70,6 @@ public class Terminal {
 //            linSlide.moveToPosition(LinearPosition.ONE, 1);
 //            mecanumEncoder.moveInches(direction.FORWARD, 54.5, 1);
 ////            for (int i = 1; i < 4; i++){
-//            mecanumEncoder.rotateDegrees(rotation.CCW, 90 * rotator, 1);
 //            mecanumEncoder.moveInches(direction.FORWARD, 12, 1);
 //            mecanumEncoder.rotateDegrees(rotation.CW, 90 * rotator, 1);
 //            linSlide.moveToPosition(LinearPosition.THREE, 1);
@@ -94,7 +93,7 @@ public class Terminal {
 //            else{
 //                mecanumEncoder.moveInches(direction.RIGHT, 25*rotator, 1);
 //            }
-            linearOpMode.telemetry.speak("sayonara");
+//            linearOpMode.telemetry.speak("sayonara");
 //            mecanumEncoder.moveInches(Direction.FORWARD, 28, 1);
             /*
             The code below supposedly places a cone on the low junction then comes back to park
@@ -107,22 +106,38 @@ public class Terminal {
             mecanumEncoder.moveInches(Direction.BACKWARD, 3, 1);
             mecanumEncoder.rotateDegrees(Direction.CW, 70, 1);
             * */
-
-            mecanumEncoder.moveInches(Direction.FORWARD, 28, 1);
+            linSlide.closeClaw();
+            mecanumEncoder.moveInches(Direction.FORWARD, 29, 1);
             if(parking == Parking.D){
-                mecanumEncoder.rotateDegrees(rotation.CCW, 90, 1);
-                mecanumEncoder.moveInches(direction.FORWARD, 24, 1);
-                mecanumEncoder.rotateDegrees(rotation.CW, 95, 1);
-                mecanumEncoder.moveInches(direction.FORWARD, 5, 1);
+                if(colorSide == ColorSide.RED) {
+                    mecanumEncoder.rotateDegrees(rotation.CCW, 90, 1);
+                    mecanumEncoder.moveInches(direction.FORWARD, 24, 1);
+                    mecanumEncoder.rotateDegrees(rotation.CW, 80, 1);
+                    mecanumEncoder.moveInches(direction.FORWARD, 8, 1);
+                }
+                else{
+                    mecanumEncoder.rotateDegrees(rotation.CCW, 70, 1);
+                    mecanumEncoder.moveInches(direction.FORWARD, 24, 1);
+                    mecanumEncoder.rotateDegrees(rotation.CW, 80, 1);
+                    mecanumEncoder.moveInches(direction.FORWARD, 8, 1);
+                }
             }
             else if(parking == Parking.Y){
                 Thread.yield();
             }
             else{
-                mecanumEncoder.rotateDegrees(rotation.CW, 90, 1);
-                mecanumEncoder.moveInches(direction.FORWARD, 24, 1);
-                mecanumEncoder.rotateDegrees(rotation.CCW, 90, 1);
-                mecanumEncoder.moveInches(direction.FORWARD, 5, 1);
+                if(colorSide == ColorSide.RED) {
+                    mecanumEncoder.rotateDegrees(rotation.CW, 85, 1);
+                    mecanumEncoder.moveInches(direction.FORWARD, 24, 1);
+                    mecanumEncoder.rotateDegrees(rotation.CCW, 80, 1);
+                    mecanumEncoder.moveInches(direction.FORWARD, 8, 1);
+                }
+                else{
+                    mecanumEncoder.rotateDegrees(rotation.CW, 80, 1);
+                    mecanumEncoder.moveInches(direction.FORWARD, 24, 1);
+                    mecanumEncoder.rotateDegrees(rotation.CCW, 80, 1);
+                    mecanumEncoder.moveInches(direction.FORWARD, 8, 1);
+                }
             }
 
         }
