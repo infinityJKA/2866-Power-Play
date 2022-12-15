@@ -58,14 +58,14 @@ public class OnePlayerFirstComp extends LinearOpMode {
             //if a is pressed, set LinearPosition to ZERO
             LinearSlide linslde = new LinearSlide(motorls, claw, this);
             if(gamepad1.a){
-                linslde.moveToPosition(LinearSlide.LinearPosition.ZERO, 0.7);
+                linslde.moveToPosition(LinearSlide.LinearPosition.ZERO, 0.5);
                 slidePos = LinearSlide.LinearPosition.ZERO;
             }
             else if (gamepad1.x) {
-                linslde.moveToPosition(LinearSlide.LinearPosition.ONE, 0.8);
+                linslde.moveToPosition(LinearSlide.LinearPosition.ONE, 0.6);
                 slidePos = LinearSlide.LinearPosition.ONE;
             } else if (gamepad1.y) {
-                linslde.moveToPosition(LinearSlide.LinearPosition.TWO, 0.8);
+                linslde.moveToPosition(LinearSlide.LinearPosition.TWO, 0.6);
                 slidePos = LinearSlide.LinearPosition.TWO;
 //             } else if (gamepad1.b) {
 //                 linslde.moveToPosition(LinearSlide.LinearPosition.CONE1, 0.8);
