@@ -25,7 +25,7 @@ public class Terminal {
         linearSlide = linearOpMode.hardwareMap.get(DcMotor.class, "ls");
         imu = linearOpMode.hardwareMap.get(BNO055IMU.class, "imu");
         claw = linearOpMode.hardwareMap.servo.get("claw");
-        RobotParameters rP = new RobotParameters(frontLeftMotor, frontRightMotor, backLeftMotor, backRightMotor, 1440, 2.6, 60, linearSlide, imu, 11);
+        RobotParameters rP = new RobotParameters(frontLeftMotor, frontRightMotor, backLeftMotor, backRightMotor, 1440, 2.6, 60, linearSlide, imu, 10.5);
         MecanumEncoder mecanumEncoder = new MecanumEncoder(rP, linearOpMode);
         LinearSlide linSlide = new LinearSlide(linearSlide, claw, linearOpMode);
         Direction direction = null, rotation = null;
@@ -111,14 +111,14 @@ public class Terminal {
             if(parking == Parking.D){
                 if(colorSide == ColorSide.RED) {
                     mecanumEncoder.rotateDegrees(rotation.CCW, 90, 1);
-                    mecanumEncoder.moveInches(direction.FORWARD, 24, 1);
-                    mecanumEncoder.rotateDegrees(rotation.CW, 80, 1);
+                    mecanumEncoder.moveInches(direction.FORWARD, 26, 1);
+                    mecanumEncoder.rotateDegrees(rotation.CW, 90, 1);
                     mecanumEncoder.moveInches(direction.FORWARD, 8, 1);
                 }
                 else{
-                    mecanumEncoder.rotateDegrees(rotation.CCW, 70, 1);
+                    mecanumEncoder.rotateDegrees(rotation.CCW, 90, 1);
                     mecanumEncoder.moveInches(direction.FORWARD, 24, 1);
-                    mecanumEncoder.rotateDegrees(rotation.CW, 80, 1);
+                    mecanumEncoder.rotateDegrees(rotation.CW, 90, 1);
                     mecanumEncoder.moveInches(direction.FORWARD, 8, 1);
                 }
             }
@@ -127,15 +127,15 @@ public class Terminal {
             }
             else{
                 if(colorSide == ColorSide.RED) {
-                    mecanumEncoder.rotateDegrees(rotation.CW, 85, 1);
-                    mecanumEncoder.moveInches(direction.FORWARD, 24, 1);
-                    mecanumEncoder.rotateDegrees(rotation.CCW, 80, 1);
+                    mecanumEncoder.rotateDegrees(rotation.CW, 90, 1);
+                    mecanumEncoder.moveInches(direction.FORWARD, 26, 1);
+                    mecanumEncoder.rotateDegrees(rotation.CCW, 90, 1);
                     mecanumEncoder.moveInches(direction.FORWARD, 8, 1);
                 }
                 else{
-                    mecanumEncoder.rotateDegrees(rotation.CW, 80, 1);
+                    mecanumEncoder.rotateDegrees(rotation.CW, 90, 1);
                     mecanumEncoder.moveInches(direction.FORWARD, 24, 1);
-                    mecanumEncoder.rotateDegrees(rotation.CCW, 80, 1);
+                    mecanumEncoder.rotateDegrees(rotation.CCW, 90, 1);
                     mecanumEncoder.moveInches(direction.FORWARD, 8, 1);
                 }
             }
