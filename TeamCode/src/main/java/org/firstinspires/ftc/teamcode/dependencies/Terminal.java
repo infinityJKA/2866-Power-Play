@@ -107,38 +107,42 @@ public class Terminal {
             mecanumEncoder.rotateDegrees(Direction.CW, 70, 1);
             * */
             linSlide.closeClaw();
-            mecanumEncoder.moveInches(Direction.FORWARD, 29, 1);
+            mecanumEncoder.moveInches(Direction.FORWARD, 3.5, 1);
             if(parking == Parking.D){
-                if(colorSide == ColorSide.RED) {
-                    mecanumEncoder.rotateDegrees(rotation.CCW, 90, 1);
-                    mecanumEncoder.moveInches(direction.FORWARD, 26, 1);
-                    mecanumEncoder.rotateDegrees(rotation.CW, 90, 1);
-                    mecanumEncoder.moveInches(direction.FORWARD, 8, 1);
-                }
-                else{
-                    mecanumEncoder.rotateDegrees(rotation.CCW, 90, 1);
-                    mecanumEncoder.moveInches(direction.FORWARD, 24, 1);
-                    mecanumEncoder.rotateDegrees(rotation.CW, 90, 1);
-                    mecanumEncoder.moveInches(direction.FORWARD, 8, 1);
-                }
+//                if(colorSide == ColorSide.RED) {
+//                    mecanumEncoder.rotateDegrees(rotation.CCW, 90, 1);
+//                    mecanumEncoder.moveInches(direction.FORWARD, 26, 1);
+//                    mecanumEncoder.rotateDegrees(rotation.CW, 90, 1);
+//                    mecanumEncoder.moveInches(direction.FORWARD, 8, 1);
+                mecanumEncoder.moveInches(Direction.LEFT, 25, 1);
+//                }
+//                else{
+//                    mecanumEncoder.rotateDegrees(rotation.CCW, 90, 1);
+//                    mecanumEncoder.moveInches(direction.FORWARD, 24, 1);
+//                    mecanumEncoder.rotateDegrees(rotation.CW, 90, 1);
+//                    mecanumEncoder.moveInches(direction.FORWARD, 8, 1);
+//                }
             }
             else if(parking == Parking.Y){
                 Thread.yield();
             }
             else{
-                if(colorSide == ColorSide.RED) {
-                    mecanumEncoder.rotateDegrees(rotation.CW, 90, 1);
-                    mecanumEncoder.moveInches(direction.FORWARD, 26, 1);
-                    mecanumEncoder.rotateDegrees(rotation.CCW, 90, 1);
-                    mecanumEncoder.moveInches(direction.FORWARD, 8, 1);
-                }
-                else{
-                    mecanumEncoder.rotateDegrees(rotation.CW, 90, 1);
-                    mecanumEncoder.moveInches(direction.FORWARD, 24, 1);
-                    mecanumEncoder.rotateDegrees(rotation.CCW, 90, 1);
-                    mecanumEncoder.moveInches(direction.FORWARD, 8, 1);
-                }
+//                if(colorSide == ColorSide.RED) {
+//                    mecanumEncoder.rotateDegrees(rotation.CW, 90, 1);
+//                    mecanumEncoder.moveInches(direction.FORWARD, 26, 1);
+//                    mecanumEncoder.rotateDegrees(rotation.CCW, 90, 1);
+//                    mecanumEncoder.moveInches(direction.FORWARD, 8, 1);
+                mecanumEncoder.moveInches(Direction.RIGHT, 29, 1);
+                mecanumEncoder.rotateDegrees(Direction.CCW, 8, 1);
+//                }
+//                else{
+//                    mecanumEncoder.rotateDegrees(rotation.CW, 90, 1);
+//                    mecanumEncoder.moveInches(direction.FORWARD, 24, 1);
+//                    mecanumEncoder.rotateDegrees(rotation.CCW, 90, 1);
+//                    mecanumEncoder.moveInches(direction.FORWARD, 8, 1);
+//                }
             }
+            mecanumEncoder.moveInches(Direction.FORWARD, 29, 1);
 
         }
 
