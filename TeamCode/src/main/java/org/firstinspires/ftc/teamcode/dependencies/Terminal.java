@@ -25,7 +25,7 @@ public class Terminal {
         linearSlide = linearOpMode.hardwareMap.get(DcMotor.class, "ls");
         imu = linearOpMode.hardwareMap.get(BNO055IMU.class, "imu");
         claw = linearOpMode.hardwareMap.servo.get("claw");
-        RobotParameters rP = new RobotParameters(frontLeftMotor, frontRightMotor, backLeftMotor, backRightMotor, 1440, 2.6, 60, linearSlide, imu, 12.5);
+        RobotParameters rP = new RobotParameters(frontLeftMotor, frontRightMotor, backLeftMotor, backRightMotor, 1440, 2.6, 60, linearSlide, imu, 10.5);
         MecanumEncoder mecanumEncoder = new MecanumEncoder(rP, linearOpMode);
         LinearSlide linSlide = new LinearSlide(linearSlide, claw, linearOpMode);
         Direction direction = null, rotation = null;
@@ -37,18 +37,19 @@ public class Terminal {
         linearOpMode.telemetry.speak("Autonomous has started!");
 
         // D = Dual (Red/Blue)
+        // O = Other
         // Y = Yellow
         // G = Green
         Parking parking = Parking.NOT_DECIDED;
-        if (colorSensor.isRegionGreen(1)) {
-            parking = Parking.G;
-            linearOpMode.telemetry.speak("Green");
+        if ((colorSensor.isRegionBlue(1) && colorSide == ColorSide.RED) || (colorSensor.isRegionRed(1) && colorSide == ColorSide.BLUE)){
+            parking = Parking.D;
+            linearOpMode.telemetry.speak("DUAL");
         } else if (colorSensor.isRegionYellow(1)) {
             parking = Parking.Y;
             linearOpMode.telemetry.speak("Yellow");
         }
         else{
-            parking = Parking.D;
+            parking = Parking.O;
             linearOpMode.telemetry.speak("Yippie!");
         }
 
@@ -69,7 +70,6 @@ public class Terminal {
 //            linSlide.moveToPosition(LinearPosition.ONE, 1);
 //            mecanumEncoder.moveInches(direction.FORWARD, 54.5, 1);
 ////            for (int i = 1; i < 4; i++){
-//            mecanumEncoder.rotateDegrees(rotation.CCW, 90 * rotator, 1);
 //            mecanumEncoder.moveInches(direction.FORWARD, 12, 1);
 //            mecanumEncoder.rotateDegrees(rotation.CW, 90 * rotator, 1);
 //            linSlide.moveToPosition(LinearPosition.THREE, 1);
@@ -93,23 +93,56 @@ public class Terminal {
 //            else{
 //                mecanumEncoder.moveInches(direction.RIGHT, 25*rotator, 1);
 //            }
+//            linearOpMode.telemetry.speak("sayonara");
+//            mecanumEncoder.moveInches(Direction.FORWARD, 28, 1);
+            /*
+            The code below supposedly places a cone on the low junction then comes back to park
 
-            mecanumEncoder.moveInches(Direction.FORWARD, 28, 1);
-            if(parking == Parking.G){
-                mecanumEncoder.rotateDegrees(rotation.CCW, 90, 1);
-                mecanumEncoder.moveInches(direction.FORWARD, 24, 1);
-                mecanumEncoder.rotateDegrees(rotation.CW, 95, 1);
-                mecanumEncoder.moveInches(direction.FORWARD, 5, 1);
+            linSlide.closeClaw();
+            linSlide.moveToPosition(LinearSlide.LinearPosition.ONE, 0.8);
+            mecanumEncoder.rotateDegrees(Direction.CCW, 70, 1);
+            mecanumEncoder.moveInches(Direction.FORWARD, 4, 1);
+            linSlide.openClaw();
+            mecanumEncoder.moveInches(Direction.BACKWARD, 3, 1);
+            mecanumEncoder.rotateDegrees(Direction.CW, 70, 1);
+            * */
+            linSlide.closeClaw();
+            mecanumEncoder.moveInches(Direction.FORWARD, 3.5, 1);
+            if(parking == Parking.D){
+//                if(colorSide == ColorSide.RED) {
+//                    mecanumEncoder.rotateDegrees(rotation.CCW, 90, 1);
+//                    mecanumEncoder.moveInches(direction.FORWARD, 26, 1);
+//                    mecanumEncoder.rotateDegrees(rotation.CW, 90, 1);
+//                    mecanumEncoder.moveInches(direction.FORWARD, 8, 1);
+                mecanumEncoder.moveInches(Direction.LEFT, 25, 1);
+//                }
+//                else{
+//                    mecanumEncoder.rotateDegrees(rotation.CCW, 90, 1);
+//                    mecanumEncoder.moveInches(direction.FORWARD, 24, 1);
+//                    mecanumEncoder.rotateDegrees(rotation.CW, 90, 1);
+//                    mecanumEncoder.moveInches(direction.FORWARD, 8, 1);
+//                }
             }
             else if(parking == Parking.Y){
                 Thread.yield();
             }
             else{
-                mecanumEncoder.rotateDegrees(rotation.CW, 90, 1);
-                mecanumEncoder.moveInches(direction.FORWARD, 24, 1);
-                mecanumEncoder.rotateDegrees(rotation.CCW, 90, 1);
-                mecanumEncoder.moveInches(direction.FORWARD, 5, 1);
+//                if(colorSide == ColorSide.RED) {
+//                    mecanumEncoder.rotateDegrees(rotation.CW, 90, 1);
+//                    mecanumEncoder.moveInches(direction.FORWARD, 26, 1);
+//                    mecanumEncoder.rotateDegrees(rotation.CCW, 90, 1);
+//                    mecanumEncoder.moveInches(direction.FORWARD, 8, 1);
+                mecanumEncoder.moveInches(Direction.RIGHT, 29, 1);
+                mecanumEncoder.rotateDegrees(Direction.CCW, 8, 1);
+//                }
+//                else{
+//                    mecanumEncoder.rotateDegrees(rotation.CW, 90, 1);
+//                    mecanumEncoder.moveInches(direction.FORWARD, 24, 1);
+//                    mecanumEncoder.rotateDegrees(rotation.CCW, 90, 1);
+//                    mecanumEncoder.moveInches(direction.FORWARD, 8, 1);
+//                }
             }
+            mecanumEncoder.moveInches(Direction.FORWARD, 29, 1);
 
         }
 

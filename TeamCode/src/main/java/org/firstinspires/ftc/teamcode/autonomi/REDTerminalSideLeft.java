@@ -9,11 +9,11 @@ import org.firstinspires.ftc.teamcode.enums.AllianceSide;
 import org.firstinspires.ftc.teamcode.enums.ColorSide;
 
 
-@Autonomous(name="TerminalSideLeft", group="Autonomous")
+@Autonomous(name="REDTerminalSideLeft", group="Autonomous")
 
-public class TerminalSideLeft extends LinearOpMode{
+public class REDTerminalSideLeft extends LinearOpMode{
     @Override
     public void runOpMode() throws InterruptedException{
-        Terminal.run(this, AllianceSide.LEFT, ColorSide.BLUE);
+        Terminal.run(this, AllianceSide.LEFT, ColorSide.RED);
     }
 }

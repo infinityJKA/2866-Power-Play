@@ -1,5 +1,3 @@
-
-
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -10,7 +8,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 import org.firstinspires.ftc.teamcode.dependencies.LinearSlide;
 
 @TeleOp
-public class NewTeleOp extends LinearOpMode {
+public class OnePlayerFirstComp extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
         // Declare our motors
@@ -21,10 +19,10 @@ public class NewTeleOp extends LinearOpMode {
         DcMotor motorBackRight = hardwareMap.dcMotor.get("bRight");
         DcMotor motorls = hardwareMap.dcMotor.get("ls");
         Servo claw = hardwareMap.servo.get("claw");
-        double gripPosition = 0;
-        double MIN_POS = 0, MAX_POS = 1;
-        gripPosition = MAX_POS;
-        boolean isOpen = true;
+//        double gripPosition = 0;
+//        double MIN_POS = 0, MAX_POS = 1;
+//        gripPosition = MAX_POS;
+//        boolean isOpen = true;
 
 
         LinearSlide.LinearPosition slidePos = LinearSlide.LinearPosition.ZERO;
@@ -52,17 +50,6 @@ public class NewTeleOp extends LinearOpMode {
             double frontRightPower = (Math.pow((y - x - rx),3) * 0.8) / denominator;
             double backRightPower = (Math.pow((y + x - rx),3) * 0.8) / denominator;
 
-            if(gamepad1.dpad_left){
-                frontLeftPower = -0.7;
-                backLeftPower = 0.7;
-                backRightPower = -0.7;
-                frontRightPower = 0.7;
-            }else if(gamepad1.dpad_right ){
-                backRightPower = 0.7;
-                frontRightPower = -0.7;
-                frontLeftPower = 0.7;
-                backLeftPower = -0.7;
-            }
             motorFrontLeft.setPower(frontLeftPower);
             motorBackLeft.setPower(backLeftPower);
             motorFrontRight.setPower(frontRightPower);
@@ -70,18 +57,19 @@ public class NewTeleOp extends LinearOpMode {
 
             //if a is pressed, set LinearPosition to ZERO
             LinearSlide linslde = new LinearSlide(motorls, claw, this);
-            if(gamepad2.a){
-                linslde.moveToPosition(LinearSlide.LinearPosition.ZERO, 0.8);
+            if(gamepad1.a){
+                linslde.moveToPosition(LinearSlide.LinearPosition.ZERO, 0.5);
                 slidePos = LinearSlide.LinearPosition.ZERO;
-            } else if (gamepad2.x) {
-                linslde.moveToPosition(LinearSlide.LinearPosition.ONE, 0.8);
+            }
+            else if (gamepad1.x) {
+                linslde.moveToPosition(LinearSlide.LinearPosition.ONE, 0.6);
                 slidePos = LinearSlide.LinearPosition.ONE;
-            } else if (gamepad2.y) {
-                linslde.moveToPosition(LinearSlide.LinearPosition.TWO, 0.8);
+            } else if (gamepad1.y) {
+                linslde.moveToPosition(LinearSlide.LinearPosition.TWO, 0.6);
                 slidePos = LinearSlide.LinearPosition.TWO;
-            } else if (gamepad2.b) {
-                linslde.moveToPosition(LinearSlide.LinearPosition.THREE, 0.8);
-                slidePos = LinearSlide.LinearPosition.THREE;
+             } else if (gamepad1.b) {
+                 linslde.moveToPosition(LinearSlide.LinearPosition.THREE, 0.8);
+                 slidePos = LinearSlide.LinearPosition.THREE;
             }
 
 //            if (gamepad1.left_bumper) {
@@ -89,25 +77,18 @@ public class NewTeleOp extends LinearOpMode {
 //            } else if (gamepad1.right_bumper) {
 //                linslde.closeClaw();
 //            }
-            if (gamepad2.right_trigger > 0) {
-                linslde.setPower(gamepad2.right_trigger);
-            } else if (gamepad2.left_trigger > 0) {
-                linslde.setPower(-gamepad2.left_trigger);
+//            if (gamepad1.right_trigger > 0) {
+//                linslde.setPower(gamepad1.right_trigger);
+//            } else if (gamepad1.left_trigger > 0) {
+//                linslde.setPower(-gamepad1.left_trigger);
+//            }
+            if (gamepad1.right_bumper){
+                linslde.openClaw();
             }
-            if (gamepad2.right_bumper && gripPosition < MAX_POS){
-                gripPosition += 0.05;
-            }
-            else if (gamepad2.left_bumper && gripPosition > MIN_POS){
-                gripPosition -= 0.05;
-            }
-            linslde.changeClawPos(gripPosition);
-            if(gamepad2.dpad_right){
-               linslde.openClaw();
-            } else if (gamepad2.dpad_left){
+            if (gamepad1.left_bumper){
                 linslde.closeClaw();
             }
-
-            telemetry.addData("Left trigger value: ", gamepad2.left_trigger);
+            telemetry.addData("Left trigger value: ", gamepad1.left_trigger);
             telemetry.update();
         }
     }
