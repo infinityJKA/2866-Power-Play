@@ -67,9 +67,9 @@ public class OnePlayerFirstComp extends LinearOpMode {
             } else if (gamepad1.y) {
                 linslde.moveToPosition(LinearSlide.LinearPosition.TWO, 0.6);
                 slidePos = LinearSlide.LinearPosition.TWO;
-//             } else if (gamepad1.b) {
-//                 linslde.moveToPosition(LinearSlide.LinearPosition.CONE1, 0.8);
-//                 slidePos = LinearSlide.LinearPosition.CONE1;
+             } else if (gamepad1.b) {
+                 linslde.moveToPosition(LinearSlide.LinearPosition.THREE, 0.8);
+                 slidePos = LinearSlide.LinearPosition.THREE;
             }
 
 //            if (gamepad1.left_bumper) {
