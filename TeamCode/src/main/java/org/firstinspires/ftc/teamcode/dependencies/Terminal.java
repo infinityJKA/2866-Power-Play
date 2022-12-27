@@ -108,6 +108,21 @@ public class Terminal {
             * */
             linSlide.closeClaw();
             mecanumEncoder.moveInches(Direction.FORWARD, 3.5, 1);
+
+            // NEW STUFF PLACE TEST
+            mecanumEncoder.moveInches(Direction.FORWARD, 25, 1);
+            mecanumEncoder.rotateDegrees(rotation.CW, 35, 1);
+            linSlide.moveToPosition(LinearSlide.LinearPosition.TWO, 0.8);
+            mecanumEncoder.moveInches(Direction.FORWARD, 9.5, 1);
+            linSlide.openClaw();
+
+            // END NEW STUFF
+            linSlide.moveToPosition(LinearSlide.LinearPosition.ZERO, 0.8);
+            mecanumEncoder.moveInches(Direction.BACKWARD, 9.5, 1);
+            mecanumEncoder.rotateDegrees(rotation.CCW, 35, 1);
+            mecanumEncoder.moveInches(Direction.BACKWARD, 25, 1);
+
+
             if(parking == Parking.D){
 //                if(colorSide == ColorSide.RED) {
 //                    mecanumEncoder.rotateDegrees(rotation.CCW, 90, 1);

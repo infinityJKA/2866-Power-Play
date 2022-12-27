@@ -22,7 +22,7 @@ public class LinearSlide {
     private final double MIN_POS = 0, MAX_POS = 1;
 
     public enum LinearPosition {
-        ZERO(0), ONE(4000), TWO(6500), THREE(8850), CONE1(200), CONE2(400), CONE3(600);
+        ZERO(0), ONE(4700), TWO(7900), THREE(11500), CONE1(200), CONE2(400), CONE3(600);
         private final int ticks;
         LinearPosition(int i){this.ticks = i;}
     }
