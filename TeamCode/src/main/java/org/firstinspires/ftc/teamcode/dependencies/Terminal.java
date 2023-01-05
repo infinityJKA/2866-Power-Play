@@ -66,98 +66,42 @@ public class Terminal {
         }
 //        int rotator = allianceSide.LEFT ? -1:1;
         if (linearOpMode.opModeIsActive()) {
-//            linSlide.closeClaw();
-//            linSlide.moveToPosition(LinearPosition.ONE, 1);
-//            mecanumEncoder.moveInches(direction.FORWARD, 54.5, 1);
-////            for (int i = 1; i < 4; i++){
-//            mecanumEncoder.moveInches(direction.FORWARD, 12, 1);
-//            mecanumEncoder.rotateDegrees(rotation.CW, 90 * rotator, 1);
-//            linSlide.moveToPosition(LinearPosition.THREE, 1);
-//            mecanumEncoder.moveInches(direction.FORWARD, 4, 1);
-//            linSlide.moveToPosition(LinearPosition.ZERO, 1);
-//            mecanumEncoder.moveInches(direction.BACKWARD, 4, 1);
-////                mecanumEncoder.rotateDegrees(rotation.CW, 90 * rotator, 1);
-////                mecanumEncoder.moveInches(direction.FORWARD, 37.75, 1);
-////                mecanumEncoder.moveInches(direction.BACKWARD, 37.75, 1);
-////                mecanumEncoder.rotateDegrees(rotation.CCW, 90 * rotator, 1);
-////                LinearPosition coneEnum = LinearPosition.valueOf("CONE"+Integer.toString(i));
-////                linSlide.pickupCone(coneEnum,1);
-////            }
-//
-//            if(parking == Parking.G){
-//                mecanumEncoder.moveInches(direction.LEFT, 10*rotator, 1);
-//            }
-//            else if(parking == Parking.Y){
-//                mecanumEncoder.moveInches(direction.RIGHT, 10*rotator, 1);
-//            }
-//            else{
-//                mecanumEncoder.moveInches(direction.RIGHT, 25*rotator, 1);
-//            }
-//            linearOpMode.telemetry.speak("sayonara");
-//            mecanumEncoder.moveInches(Direction.FORWARD, 28, 1);
-            /*
-            The code below supposedly places a cone on the low junction then comes back to park
+
+            //The code below supposedly places a cone on the low junction then comes back to park
 
             linSlide.closeClaw();
-            linSlide.moveToPosition(LinearSlide.LinearPosition.ONE, 0.8);
-            mecanumEncoder.rotateDegrees(Direction.CCW, 70, 1);
-            mecanumEncoder.moveInches(Direction.FORWARD, 4, 1);
+            mecanumEncoder.sleep(1000);
+            mecanumEncoder.moveInches(direction.FORWARD, 40, 1);
+            mecanumEncoder.moveInches(direction.BACKWARD, 8, 1);
+            linSlide.moveToPosition(LinearSlide.LinearPosition.AUTO_TWO, 0.8);
+            mecanumEncoder.rotateDegrees(Direction.CW, 46, 1);
+            mecanumEncoder.moveInches(Direction.FORWARD, 5, 1);
+            mecanumEncoder.sleep(1000);
+            linSlide.sleep(1000);
             linSlide.openClaw();
-            mecanumEncoder.moveInches(Direction.BACKWARD, 3, 1);
-            mecanumEncoder.rotateDegrees(Direction.CW, 70, 1);
-            * */
-            linSlide.closeClaw();
-            mecanumEncoder.moveInches(Direction.FORWARD, 3.5, 1);
-
-            // NEW STUFF PLACE TEST
-            mecanumEncoder.moveInches(Direction.FORWARD, 25, 1);
-            mecanumEncoder.rotateDegrees(rotation.CW, 35, 1);
-            linSlide.moveToPosition(LinearSlide.LinearPosition.TWO, 0.8);
-            mecanumEncoder.moveInches(Direction.FORWARD, 9.5, 1);
-            linSlide.openClaw();
-
-            // END NEW STUFF
+            mecanumEncoder.moveInches(Direction.BACKWARD, 5, 1);
+            mecanumEncoder.rotateDegrees(Direction.CCW, 46, 1);
             linSlide.moveToPosition(LinearSlide.LinearPosition.ZERO, 0.8);
-            mecanumEncoder.moveInches(Direction.BACKWARD, 9.5, 1);
-            mecanumEncoder.rotateDegrees(rotation.CCW, 35, 1);
-            mecanumEncoder.moveInches(Direction.BACKWARD, 25, 1);
 
 
             if(parking == Parking.D){
-//                if(colorSide == ColorSide.RED) {
-//                    mecanumEncoder.rotateDegrees(rotation.CCW, 90, 1);
-//                    mecanumEncoder.moveInches(direction.FORWARD, 26, 1);
-//                    mecanumEncoder.rotateDegrees(rotation.CW, 90, 1);
-//                    mecanumEncoder.moveInches(direction.FORWARD, 8, 1);
-                mecanumEncoder.moveInches(Direction.LEFT, 25, 1);
-//                }
-//                else{
-//                    mecanumEncoder.rotateDegrees(rotation.CCW, 90, 1);
-//                    mecanumEncoder.moveInches(direction.FORWARD, 24, 1);
-//                    mecanumEncoder.rotateDegrees(rotation.CW, 90, 1);
-//                    mecanumEncoder.moveInches(direction.FORWARD, 8, 1);
-//                }
+                mecanumEncoder.moveInches(Direction.BACKWARD, 7, 1);
+                mecanumEncoder.rotateDegrees(Direction.CW, 90, 1);
+                mecanumEncoder.moveInches(direction.BACKWARD, 27, 1);
+                mecanumEncoder.rotateDegrees(Direction.CCW, 90, 1);
+                mecanumEncoder.moveInches(direction.FORWARD, 5, 1);
             }
             else if(parking == Parking.Y){
-                Thread.yield();
+                mecanumEncoder.moveInches(Direction.BACKWARD, 7, 1);
             }
             else{
-//                if(colorSide == ColorSide.RED) {
-//                    mecanumEncoder.rotateDegrees(rotation.CW, 90, 1);
-//                    mecanumEncoder.moveInches(direction.FORWARD, 26, 1);
-//                    mecanumEncoder.rotateDegrees(rotation.CCW, 90, 1);
-//                    mecanumEncoder.moveInches(direction.FORWARD, 8, 1);
-                mecanumEncoder.moveInches(Direction.RIGHT, 29, 1);
-                mecanumEncoder.rotateDegrees(Direction.CCW, 8, 1);
-//                }
-//                else{
-//                    mecanumEncoder.rotateDegrees(rotation.CW, 90, 1);
-//                    mecanumEncoder.moveInches(direction.FORWARD, 24, 1);
-//                    mecanumEncoder.rotateDegrees(rotation.CCW, 90, 1);
-//                    mecanumEncoder.moveInches(direction.FORWARD, 8, 1);
-//                }
+                mecanumEncoder.moveInches(Direction.BACKWARD, 7, 1);
+                mecanumEncoder.rotateDegrees(Direction.CCW, 90, 1);
+                mecanumEncoder.moveInches(direction.BACKWARD, 25, 1);
+                mecanumEncoder.rotateDegrees(Direction.CW, 90, 1);
+                mecanumEncoder.moveInches(direction.FORWARD, 5, 1);
             }
-            mecanumEncoder.moveInches(Direction.FORWARD, 29, 1);
+//            mecanumEncoder.moveInches(Direction.FORWARD, 29, 1);
 
         }
 
