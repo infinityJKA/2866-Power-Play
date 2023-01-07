@@ -81,7 +81,7 @@ public class Terminal {
             linSlide.openClaw();
             mecanumEncoder.moveInches(Direction.BACKWARD, 5, 1);
             mecanumEncoder.rotateDegrees(Direction.CCW, 46, 1);
-            linSlide.moveToPosition(LinearSlide.LinearPosition.ZERO, 0.8);
+            linSlide.moveToPosition(LinearSlide.LinearPosition.ZERO, 0.6);
 
 
             if(parking == Parking.D){
