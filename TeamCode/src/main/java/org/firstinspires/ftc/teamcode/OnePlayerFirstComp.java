@@ -89,6 +89,7 @@ public class OnePlayerFirstComp extends LinearOpMode {
                 linslde.closeClaw();
             }
             telemetry.addData("Left trigger value: ", gamepad1.left_trigger);
+            telemetry.addData("Linear Slide encoder value: ", linslde.getCurrentPosition());
             telemetry.update();
         }
     }
