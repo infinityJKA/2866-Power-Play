@@ -22,7 +22,7 @@ public class LinearSlide {
     private final double MIN_POS = 0, MAX_POS = 1;
 
     public enum LinearPosition {
-        ZERO(1500), ONE(5150), AUTO_TWO(9500), TWO(9500), THREE(11575), CONE1(100), CONE2(400), CONE3(600);
+        ZERO(150), ONE(4000), AUTO_TWO(5000), TWO(7000), THREE(9600), CONE1(100), CONE2(400), CONE3(600);
         private final int ticks;
         LinearPosition(int i){this.ticks = i;}
     }
@@ -81,7 +81,7 @@ public class LinearSlide {
         isOpen = true;
     }
     public void closeClaw(){
-        changeClawPos(0.4);
+        changeClawPos(0.15);
         isOpen = false;
     }
     public void changeClawPos(double position){
@@ -95,6 +95,5 @@ public class LinearSlide {
     public int getCurrentPosition(){
         return linearSlideMotor.getCurrentPosition();
     }
-
     public void sleep(long milli){linearOp.sleep(milli);}
 }
