@@ -35,6 +35,8 @@ public class OnePlayerFirstComp extends LinearOpMode {
 
         if (isStopRequested()) return;
 
+        LinearSlide linslde = new LinearSlide(motorls, claw, this);
+
         while (opModeIsActive()) {
 //            claw.setPosition(Range.clip(gripPosition, MIN_POS, MAX_POS));
             double y = -gamepad1.left_stick_y; // Remember, this is reversed!
@@ -56,7 +58,6 @@ public class OnePlayerFirstComp extends LinearOpMode {
             motorBackRight.setPower(backRightPower);
 
             //if a is pressed, set LinearPosition to ZERO
-            LinearSlide linslde = new LinearSlide(motorls, claw, this);
             if(gamepad1.a){
                 linslde.moveToPosition(LinearSlide.LinearPosition.ZERO, 1);
                 slidePos = LinearSlide.LinearPosition.ZERO;
@@ -77,11 +78,13 @@ public class OnePlayerFirstComp extends LinearOpMode {
 //            } else if (gamepad1.right_bumper) {
 //                linslde.closeClaw();
 //            }
-//            if (gamepad1.right_trigger > 0) {
-//                linslde.setPower(gamepad1.right_trigger);
-//            } else if (gamepad1.left_trigger > 0) {
-//                linslde.setPower(-gamepad1.left_trigger);
-//            }
+            if (gamepad1.right_trigger > 0) {
+                linslde.analogMoveSlide(gamepad1.right_trigger);
+            } else if (gamepad1.left_trigger > 0) {
+                linslde.analogMoveSlide(-gamepad1.left_trigger);
+            }
+
+
             if (gamepad1.right_bumper){
                 linslde.openClaw();
             }

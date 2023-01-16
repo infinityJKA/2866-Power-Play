@@ -74,7 +74,7 @@ public class MecanumEncoder {
         runToPostions();
         setMotorPowers(power);
 
-        while (areMotorsBusy() || !motorsReachedTarget(frontLeftTicks, frontRightTicks, backLeftTicks, backRightTicks) && linearOpMode.opModeIsActive()){
+        while (isMoving()){
             Thread.yield();
         }
         resetMotorPowers();
@@ -82,6 +82,11 @@ public class MecanumEncoder {
 
         sleep(100);
     }
+
+    public boolean isMoving(){
+        return areMotorsBusy() && linearOpMode.opModeIsActive();
+    }
+
     public void rotateDegrees(Direction rotating, double degrees, double speed){
         storeMotorModes();
         resetEncoders();
@@ -171,12 +176,12 @@ public class MecanumEncoder {
         setMotorPowers(speed);
         // setMotorPowers(frontLeftPower, frontRightPower, backLeftPower, backRightPower); // Test this if the line above does not work
 
-        while (areMotorsBusy() || !motorsReachedTarget(frontLeftTicks, frontRightTicks, backLeftTicks, backRightTicks) && linearOpMode.opModeIsActive()){
-            Thread.yield();
-        }
-        resetMotorPowers();
-        restoreMotorModes();
-        sleep(100);
+//        while (areMotorsBusy() || !motorsReachedTarget(frontLeftTicks, frontRightTicks, backLeftTicks, backRightTicks) && linearOpMode.opModeIsActive()){
+//            Thread.yield();
+//        }
+//        resetMotorPowers();
+//        restoreMotorModes();
+//        sleep(100);
     }
     public void restoreMotorModes(){
         rP.frontLeftMotor.setMode(frontLeftMode);

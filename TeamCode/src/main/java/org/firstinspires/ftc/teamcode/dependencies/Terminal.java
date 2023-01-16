@@ -70,10 +70,10 @@ public class Terminal {
             //The code below supposedly places a cone on the low junction then comes back to park
 
             linSlide.closeClaw();
-            mecanumEncoder.sleep(1000);
+            mecanumEncoder.sleep(750);
             mecanumEncoder.moveInches(direction.FORWARD, 40, 1);
             mecanumEncoder.moveInches(direction.BACKWARD, 8, 1);
-            linSlide.moveToPosition(LinearSlide.LinearPosition.AUTO_TWO, 0.8);
+            linSlide.moveToPosition(LinearSlide.LinearPosition.TWO, 0.8);
             mecanumEncoder.rotateDegrees(Direction.CW, 46, 1);
             mecanumEncoder.moveInches(Direction.FORWARD, 5, 1);
             mecanumEncoder.sleep(1000);
