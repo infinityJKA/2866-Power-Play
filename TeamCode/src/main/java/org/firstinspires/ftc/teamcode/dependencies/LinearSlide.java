@@ -32,6 +32,7 @@ public class LinearSlide {
         this.claw = claw;
         this.linearOp = linearOp;
         linearSlideMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        linearSlideMotor.setTargetPosition(0);
         linearSlideMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         linearSlideMotor.setDirection(DcMotor.Direction.REVERSE);
     }
