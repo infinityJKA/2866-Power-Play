@@ -4,5 +4,5 @@ package org.firstinspires.ftc.teamcode.enums;
 //           - Justin (Oct 17, 2022)
 
 public enum Levels {
-    ZERO, LOW, MIDDLE, HIGH
+    ZERO, LOW, MIDDLE, HIGH, CONE5, CONE4, CONE3, CONE2
 }

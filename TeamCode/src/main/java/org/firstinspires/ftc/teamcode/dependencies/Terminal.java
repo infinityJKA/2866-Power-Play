@@ -70,32 +70,34 @@ public class Terminal {
             //The code below supposedly places a cone on the low junction then comes back to park
 
             linSlide.closeClaw();
+            linSlide.sleep(2000);
+            linSlide.moveToPosition(LinearSlide.LinearPosition.ONE, 1);
             mecanumEncoder.sleep(750);
             mecanumEncoder.moveInches(direction.FORWARD, 40, 1);
             mecanumEncoder.moveInches(direction.BACKWARD, 8, 1);
-            linSlide.moveToPosition(LinearSlide.LinearPosition.TWO, 0.8);
-            mecanumEncoder.rotateDegrees(Direction.CW, 46, 1);
-            mecanumEncoder.moveInches(Direction.FORWARD, 5, 1);
-            mecanumEncoder.sleep(1000);
-            linSlide.sleep(1000);
+            linSlide.moveToPosition(LinearSlide.LinearPosition.TWO, 1);
+            mecanumEncoder.rotateDegrees(Direction.CW, 40, 1);
+            mecanumEncoder.moveInches(Direction.FORWARD, 4, 1);
+            mecanumEncoder.sleep(100);
+            linSlide.sleep(100);
             linSlide.openClaw();
-            mecanumEncoder.moveInches(Direction.BACKWARD, 5, 1);
-            mecanumEncoder.rotateDegrees(Direction.CCW, 46, 1);
-            linSlide.moveToPosition(LinearSlide.LinearPosition.ZERO, 0.6);
+            mecanumEncoder.moveInches(Direction.BACKWARD, 4, 1);
+            mecanumEncoder.rotateDegrees(Direction.CCW, 40, 1);
+            linSlide.moveToPosition(LinearSlide.LinearPosition.ZERO, 0.5);
 
 
             if(parking == Parking.D){
-                mecanumEncoder.moveInches(Direction.BACKWARD, 7, 1);
+                mecanumEncoder.moveInches(Direction.BACKWARD, 5, 1);
                 mecanumEncoder.rotateDegrees(Direction.CW, 90, 1);
                 mecanumEncoder.moveInches(direction.BACKWARD, 27, 1);
                 mecanumEncoder.rotateDegrees(Direction.CCW, 90, 1);
                 mecanumEncoder.moveInches(direction.FORWARD, 5, 1);
             }
             else if(parking == Parking.Y){
-                mecanumEncoder.moveInches(Direction.BACKWARD, 7, 1);
+                mecanumEncoder.moveInches(Direction.BACKWARD, 5, 1);
             }
             else{
-                mecanumEncoder.moveInches(Direction.BACKWARD, 7, 1);
+                mecanumEncoder.moveInches(Direction.BACKWARD, 5, 1);
                 mecanumEncoder.rotateDegrees(Direction.CCW, 90, 1);
                 mecanumEncoder.moveInches(direction.BACKWARD, 25, 1);
                 mecanumEncoder.rotateDegrees(Direction.CW, 90, 1);
