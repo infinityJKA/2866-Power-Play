@@ -9,7 +9,7 @@ import org.opencv.core.Point;
 public class ColorSensor {
     public CameraColorSensor camSensor;
     LinearOpMode linearOpMode;
-    final Point[] DEFAULT_POINTS = {new Point(1, 30), new Point(100, 95), new Point(175, 30)};
+    final Point[] DEFAULT_POINTS = {new Point(1, 30), new Point(145, 130), new Point(163, 25)};
     final int DEFAULT_WIDTH = 40;
     final int DEFAULT_HEIGHT = 60;
     public ColorSensor(String cameraName, HardwareMap hardwareMap, LinearOpMode linearOpMode){
