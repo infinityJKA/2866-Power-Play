@@ -84,8 +84,10 @@ public class Terminal {
             linSlide.moveToPosition(LinearSlide.LinearPosition.TWO, 1);
             mecanumEncoder.rotateDegrees(Direction.CW, 40, 1);
             mecanumEncoder.moveInches(Direction.FORWARD, 4.5, 1);
-//            mecanumEncoder.sleep(100);
-//            linSlide.sleep(100);
+
+            mecanumEncoder.sleep(100);
+            linSlide.sleep(100);
+
             linSlide.openClaw();
             //
             linSlide.moveToPosition(LinearSlide.LinearPosition.ZERO, 1);
@@ -94,23 +96,23 @@ public class Terminal {
             mecanumEncoder.sleep(150);
             mecanumEncoder.moveInches(Direction.FORWARD, 28, 1);
             mecanumEncoder.moveInches(Direction.BACKWARD, 5, 1);
-            mecanumEncoder.rotateDegrees(Direction.CCW, 100, 1);
-            linSlide.moveToPosition(LinearSlide.LinearPosition.CONE5, 1);
-            mecanumEncoder.moveInches(Direction.FORWARD, 26, 1);
-            linSlide.closeClaw();
-            linSlide.sleep(400);
-            linSlide.moveToPosition(LinearSlide.LinearPosition.ONE, 1);
-            mecanumEncoder.sleep(400);
-            mecanumEncoder.moveInches(Direction.BACKWARD, 22, 1);
-            mecanumEncoder.rotateDegrees(Direction.CCW, 43, 1);
-            linSlide.moveToPosition(LinearSlide.LinearPosition.ONE, 1);
-            mecanumEncoder.moveInches(Direction.FORWARD, 6, 1);
-            mecanumEncoder.sleep(100);
-            linSlide.sleep(100);
-            linSlide.openClaw();
-            mecanumEncoder.moveInches(Direction.BACKWARD, 6, 1);
-            mecanumEncoder.rotateDegrees(Direction.CW, 40, 1);
-            linSlide.moveToPosition(LinearSlide.LinearPosition.ZERO, 0.8);
+//            mecanumEncoder.rotateDegrees(Direction.CCW, 100, 1);
+//            linSlide.moveToPosition(LinearSlide.LinearPosition.CONE5, 1);
+//            mecanumEncoder.moveInches(Direction.FORWARD, 28, 1);
+//            linSlide.closeClaw();
+//            linSlide.sleep(400);
+//            linSlide.moveToPosition(LinearSlide.LinearPosition.ONE, 1);
+//            mecanumEncoder.sleep(400);
+//            mecanumEncoder.moveInches(Direction.BACKWARD, 22, 1);
+//            mecanumEncoder.rotateDegrees(Direction.CCW, 43, 1);
+//            linSlide.moveToPosition(LinearSlide.LinearPosition.ONE, 1);
+//            mecanumEncoder.moveInches(Direction.FORWARD, 6, 1);
+//            mecanumEncoder.sleep(100);
+//            linSlide.sleep(100);
+//            linSlide.openClaw();
+//            mecanumEncoder.moveInches(Direction.BACKWARD, 6, 1);
+//            mecanumEncoder.rotateDegrees(Direction.CW, 40, 1);
+//            linSlide.moveToPosition(LinearSlide.LinearPosition.ZERO, 0.8);
 
 
 
@@ -118,7 +120,8 @@ public class Terminal {
 
 //
             if(parking == Parking.D){
-                mecanumEncoder.moveInches(Direction.FORWARD,18,1);
+                mecanumEncoder.rotateDegrees(Direction.CCW, 93, 1);
+                mecanumEncoder.moveInches(Direction.FORWARD,21.75,1);
 //                mecanumEncoder.rotateDegrees(Direction.CCW, 90, 1);
 //                mecanumEncoder.moveInches(Direction.BACKWARD, 5, 1);
 //                mecanumEncoder.rotateDegrees(Direction.CW, 90, 1);
@@ -131,8 +134,9 @@ public class Terminal {
 //                mecanumEncoder.moveInches(Direction.BACKWARD, 5, 1);
             }
             else{
+                mecanumEncoder.rotateDegrees(Direction.CCW, 93, 1);
                 mecanumEncoder.rotateDegrees(Direction.CW, 10, 1);
-                mecanumEncoder.moveInches(Direction.BACKWARD,28,1);
+                mecanumEncoder.moveInches(Direction.BACKWARD,24,1);
 //                mecanumEncoder.moveInches(Direction.BACKWARD, 5, 1);
 //                mecanumEncoder.rotateDegrees(Direction.CCW, 90, 1);
 //                mecanumEncoder.moveInches(direction.BACKWARD, 25, 1);
